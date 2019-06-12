@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title.name %></title>
+    <!-- <% if(htmlWebpackPlugin.options.hasEditor) { %>
+      <script src="<%= BASE_URL %>ckeditor/ckeditor.js"></script>
+      <script src="<%= BASE_URL %>ckeditor/adapters/jquery.js"></script>
+    <% } %> -->
+    <!-- <link rel="stylesheet" href="<%= BASE_URL %>css/normalize.min.css"> -->
+    <link rel="stylesheet" href="<%= BASE_URL %>css/bulma.min.css">
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but client doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <script src="<%= BASE_URL %>js/jquery.slim.min.js"></script>
+    <script src="<%= BASE_URL %>js/vue.min.js"></script>
+    <!-- <script src="<%= BASE_URL %>js/vue-i18n.min.js"></script> -->
+    <script src="<%= BASE_URL %>js/vue-translator.js"></script>
+    <% if(htmlWebpackPlugin.options.title.isDate) { %>
+      <script src="<%= BASE_URL %>js/laydate/laydate.js"></script>
+      <script src="https://cdn.bootcss.com/vee-validate/2.2.6/vee-validate.minimal.min.js"></script>
+    <% } %>
+
+    
+    <!-- <script src="<%= BASE_URL %>js/bootstrap.min.js"></script>
+    <script src="<%= BASE_URL %>js/bootstrap.bundle.min.js"></script> -->
+  </body>
+</html>
