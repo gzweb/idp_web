@@ -88,8 +88,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
 import { getValidationImg , signUp } from '../api/public'
@@ -97,7 +96,7 @@ import { getValidationImg , signUp } from '../api/public'
 import translator from '../language/lib/sign_up'
 
 
-Vue.use(Toast);
+
 
 
 import '../css/registered.css'
@@ -139,10 +138,7 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
                     const data = await signUp({
                         email:this.email,
                         password:this.password,
@@ -152,11 +148,10 @@ export default {
                         captcha:this.code,
                         captcha_id:this.codeID
                     });
-
-                    Toast.clear();
+                        
+                    
                     this.show = 1;
                     if(data.code != 0) {
-                        
                         this.ctxMessage = data.message;
                         this.setValidationImg();
                         return;

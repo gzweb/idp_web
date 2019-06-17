@@ -259,8 +259,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 import '../css/application.css'
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
@@ -348,13 +347,10 @@ export default {
                 headers:{'Content-Type':'multipart/form-data'}
             };
 
-            Toast.loading({
-                mask:true,
-                duration:0
-            });
+            
 
             const data = await upLoadImg(params,config);
-            Toast.clear();
+            
 
             this.modalShow = 1;
 
@@ -398,14 +394,11 @@ export default {
 
 
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
 
                     const data = await postApplication('TFR',this.params);
                    
-                    Toast.clear();
+                    
                     
                     this.modalShow = 1;
                     if(data.code != '0') {

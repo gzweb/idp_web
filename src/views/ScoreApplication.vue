@@ -191,8 +191,6 @@ import Modal from '@/components/Modal'
 import BannerStep from '@/components/BannerStep'
 import DatePicker from 'vue2-datepicker'
 
-import Vue from 'vue'
-import { Toast } from 'vant';
 
 import { getApplicationInfo,postApplication } from '../api/application'
 import translator from '../language/lib/application'
@@ -297,15 +295,12 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
 
                     const data = await postApplication('EOR',this.params);
                     // 
 
-                    Toast.clear();
+                    
                     
 
                     this.modalShow = 1;

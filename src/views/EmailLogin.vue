@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
 import tools from '@/utils/tools'
@@ -74,16 +72,13 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+        
                     const data = await emailLogin({
                         code:this.code,
                         token:this.$route.query.token
                     });
 
-                    Toast.clear();
+               
                     
 
                     if(data.code != '0') {

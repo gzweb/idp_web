@@ -73,8 +73,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 
 import '../css/table.css'
 import RellaxBanner from '@/components/RellaxBanner'
@@ -96,9 +95,9 @@ export default {
         }
     },
     async created(){
-        Toast.loading()
+        // Toast.loading();
         const data = await getApplicationCtx(this.$route.params.id)
-        Toast.clear();
+        // Toast.clear();
         this.menuList = data.data[0]['value'];
         this.list = data.data.slice(1);
         console.log(this.list);

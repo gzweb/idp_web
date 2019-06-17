@@ -41,8 +41,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
 import {resetPassword} from '@/api/public'
@@ -83,16 +82,13 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
                     const data = await resetPassword({
                         data:this.$route.params.id,
                         password:this.password
                     });
 
-                    Toast.clear();
+                    
                     
                     this.show = 1;
                     if(data.code != '0') {

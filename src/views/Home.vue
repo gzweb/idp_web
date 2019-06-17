@@ -145,7 +145,6 @@
 import RellaxBanner from '@/components/RellaxBanner'
 import translator from '../language/lib/home'
 import Vue from 'vue'
-import { Toast } from 'vant';
 import vPage from 'v-page';
 import Modal from '@/components/Modal'
 import {changePassword} from '@/api/public'
@@ -211,17 +210,14 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                  
                     
                     const data = await changePassword({
                         password:this.oldPassword,
                         new_password:this.password
                     });
 
-                    Toast.clear();
+                
                     this.show = 1;
                     if(data.code != '0') {  
                         this.ctxMessage = data.message;

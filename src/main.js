@@ -51,7 +51,14 @@ router.beforeEach((to, from, next) => {
 	const token = store.state.isLogin;
 	if(to.meta.login) {
 		tools.lastLink = to.path;
-		!token?next('/login'):next() 
+
+		if(!token) {
+			NProgress.done()
+			next('/login')
+		}else{
+			next() 
+		}
+			// !token?next('/login'):next() 
 	}else{
 		if( (token && to.name == 'Login') || (token && to.name == 'SignUp')) {next('/');return} //解决登陆后 禁止去登陆页和注册页
 		next();

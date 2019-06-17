@@ -250,8 +250,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 import '../css/application.css'
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
@@ -350,17 +349,14 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
 
                     this.params['count'] = this.params.institution.length;
                     
 
                     const data = await postApplication('RTRF',this.params);
                    
-                    Toast.clear();
+        
                     
 
                     this.modalShow = 1;

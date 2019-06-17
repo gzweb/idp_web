@@ -189,8 +189,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 import '../css/application.css'
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
@@ -267,10 +266,7 @@ export default {
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
 
 
                     this.params.tel = `${this.params.countryCode}-${this.params.tel}`;
@@ -280,7 +276,7 @@ export default {
 
                     const data = await postApplication('OTRF',this.params);
                    
-                    Toast.clear();
+                    
                     
 
                     this.modalShow = 1;

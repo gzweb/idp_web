@@ -73,8 +73,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 import '../css/table.css'
 import RellaxBanner from '@/components/RellaxBanner'
 import {formatSeconds} from '../utils/utils'
@@ -107,12 +106,10 @@ export default {
     },
     async created(){
 
-        Toast.loading({
-            mask:true
-        })
+       
         
         const data = await getPayInfo(this.$route.params.id);
-        Toast.clear();
+        
 
         console.log(data);
 

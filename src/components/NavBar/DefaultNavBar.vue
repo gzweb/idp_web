@@ -134,11 +134,9 @@ export default {
             if(!this.swiperIndex) {
                 this.$store.commit('setIndexFixed',this.isNavbar)
             }
-            
-
-            
         },
         goPage(key){
+            this.isNavbar = false;
             switch(key) {
                 case 0:
                     this.$router.push('/login')

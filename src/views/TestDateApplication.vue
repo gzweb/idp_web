@@ -157,8 +157,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Toast } from 'vant';
+
 
 
 import '../css/application.css'
@@ -248,13 +247,10 @@ export default {
                 headers:{'Content-Type':'multipart/form-data'}
             };
 
-            Toast.loading({
-                mask:true,
-                duration:0
-            });
+            
 
             const data = await upLoadImg(params,config);
-            Toast.clear();
+            
 
             this.modalShow = 1;
 
@@ -307,14 +303,11 @@ export default {
                         return;
                     }
 
-                    Toast.loading({
-                        mask:true,
-                        duration:0
-                    });
+                    
 
                     const data = await postApplication('TDT',this.params);
                    
-                    Toast.clear();
+                    
                     
 
                     this.modalShow = 1;
