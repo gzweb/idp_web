@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getCookie } from './utils/utils'
+// import { getCookie } from './utils/utils'
 
 let locale = localStorage.getItem('language');
 
@@ -39,7 +39,7 @@ export default new Vuex.Store({
 		isIndexFixed:0,
 		swiperIndex:0,
 		language:locale,
-		isLogin:getCookie('token'),
+		isLogin:Cookies.get('token'),
 		includeList: []
 	},
 	mutations: {

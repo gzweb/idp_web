@@ -7,7 +7,7 @@
                     {{$t('s6')}}
                     <div class="delete is-medium" @click="hideModal"></div>
                 </div>
-                <div class="modal-view-ctx">{{ctxMessage}}</div>
+                <div class="modal-view-ctx" v-html="ctxMessage"></div>
                 <div class="modal-button-view">
                     <div class="button button-style modal-button" @click="hideModal">确定</div>
                 </div>

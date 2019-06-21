@@ -68,7 +68,7 @@
                     </div>
                     <div class="column">
                         <!-- 限制时间 not-after="2019-05-30 12:00:00" -->
-                        <date-picker name="params.test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="MM/DD/YYYY" confirm></date-picker>
+                        <date-picker name="params.test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div class="application-tips">{{$t('ap38')}}</div>
                         <div v-show="errors.has('params.test_date')" class="help is-danger">{{ $t('validation-6') }}</div>
                     

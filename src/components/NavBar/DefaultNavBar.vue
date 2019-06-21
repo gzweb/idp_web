@@ -101,7 +101,8 @@
 
 <script>
 import Language from './Language'
-import { removeCookie } from '../../utils/utils'
+// import { removeCookie } from '../../utils/utils'
+import {exitAccount} from '../../api/public'
 
 export default {
     props:['type'],
@@ -122,9 +123,10 @@ export default {
         }
     },
     methods:{
-        exitAccount(){
-            removeCookie('token');
-            console.log(removeCookie);
+        async exitAccount(){
+            await exitAccount();
+            Cookies.remove('token');
+            // console.log(removeCookie);
             location.reload();
         },
         showlayer(){

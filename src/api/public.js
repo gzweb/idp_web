@@ -18,6 +18,9 @@ export function signUp(params) {
 export function getValidationImg(params) {
     return axios.get('/captcha', { params })
 }
+export function exitAccount() {
+    return axios.post('/account/logout')
+}
 // export function isMfa(params) {
 //     return axios.get('/mfa', { params })
 // }

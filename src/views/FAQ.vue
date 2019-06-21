@@ -7,25 +7,21 @@
                 <img class="rellax-pic" src="../../public/images/banner_8.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">Be better prepared for your IELTS test!</div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{$t('fq1')}}</div>
                 
             </template>
             
         </RellaxBanner>
         <div class="rellax-page-view">
-            <div class="title-style-1 faq-title">IELTS FAQ</div>
+            <div class="title-style-1 faq-title">{{$t('fq2')}}</div>
  
             <div class="container">
                 <div class="columns is-gapless">
                     <div class="column is-6 notifications-column-view">
                         <div class="faq-notifications-view">
                             <div class="faq-notifications-item">
-                                <div class="faq-notifications-title">Frequently asked questions about IELTS</div>
-                                <div class="faq-notifications-text">In addition to the questions below, you will find IELTS support on our official IELTS website: 
-                                    <a href="http://www.IELTSessentials.com">www.IELTSessentials.com</a>
-                                    . As a proud co-owner of IELTS, 
-                                    IDP Education provides free advice, practice questions and IELTS 
-                                    Masterclasses and seminars to help you be better prepared.
+                                <div class="faq-notifications-title">{{$t('fq2')}}</div>
+                                <div class="faq-notifications-text" v-html="$t('fq3')">
                                 </div>
                             </div>
                         </div>
@@ -54,7 +50,7 @@
 import RellaxBanner from '@/components/RellaxBanner'
 import {getFQA} from '@/api/home'
 
-import translator from '../language/lib/home'
+import translator from '../language/lib/fqa'
 
 
 export default {

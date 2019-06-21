@@ -59,11 +59,11 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="MM/DD/YYYY" confirm></date-picker>
+                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div v-show="errors.has('testDate')" class="help is-danger">{{ $t('ap10') }}</div>
                     </div>
                     <div class="column">
-                        <date-picker name="newTestDate" v-validate="'required'" :editable="false" :placeholder="$t('ap11')" value-type="format" width="100%" :not-before="beforeTime" input-class="input" v-model="params.new_test_date" :lang="getLanguage" type="date" format="MM/DD/YYYY" confirm></date-picker>
+                        <date-picker name="newTestDate" v-validate="'required'" :editable="false" :placeholder="$t('ap11')" value-type="format" width="100%" :not-before="beforeTime" input-class="input" v-model="params.new_test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div v-show="errors.has('newTestDate')" class="help is-danger">{{ $t('ap40') }}</div>
                     </div>
                 </div>

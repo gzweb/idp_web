@@ -36,7 +36,7 @@
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
 import tools from '@/utils/tools'
-import {setCookie} from '@/utils/utils'
+// import {setCookie} from '@/utils/utils'
 import {emailLogin} from '@/api/public'
 import translator from '../language/lib/login'
 
@@ -88,8 +88,8 @@ export default {
                         return;
                     };
 
-
-                    setCookie('token',data.data.token,0.5);
+                    Cookies.set('token', data.data.token, { expires: 0.5 });
+                    // setCookie('token',data.data.token,0.5);
                     this.$store.commit('setLoginState',data.data.token);
 
                     

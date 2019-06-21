@@ -148,7 +148,7 @@ import Vue from 'vue'
 import vPage from 'v-page';
 import Modal from '@/components/Modal'
 import {changePassword} from '@/api/public'
-import {removeCookie} from '@/utils/utils'
+// import {removeCookie} from '@/utils/utils'
 import {getApplicationList,getUserInfo} from '@/api/home'
 
 
@@ -224,7 +224,7 @@ export default {
                         return;
                     };
                     this.isSussces = 1;
-                    removeCookie('token');
+                    Cookies.remove('token');
                     this.ctxMessage = this.$t('home18');
                 }
 

@@ -43,7 +43,7 @@ export default {
                     language = '简体中文'
                     break;
                 case 'zh':
-                    language = '繁体中文'
+                    language = '繁體中文'
                     break;
                 case 'en':
                     language = 'English'

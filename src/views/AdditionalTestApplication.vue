@@ -51,7 +51,7 @@
                 <div class="columns">
                     
                     <div class="column">
-                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="MM/DD/YYYY" confirm></date-picker>
+                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div v-show="errors.has('testDate')" class="help is-danger">{{ $t('validation-6') }}</div>
                     </div>
                     <div class="column">

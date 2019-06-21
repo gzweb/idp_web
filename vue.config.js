@@ -47,7 +47,7 @@ module.exports = {
                 
             }
             
-
+            args[0].cdnJs.push(`${http}js.cookie.min.js`);
             args[0].cdnJs.push(`${http}lodash.min.js`);
             args[0].cdnJs.push(`${http}print.min.js`);
 

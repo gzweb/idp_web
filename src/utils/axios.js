@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '../store'
 import router from '../router'
 import { Toast } from 'vant';
-import { removeCookie } from './utils';
+// import { removeCookie } from './utils';
 
 const url = process.env.NODE_ENV == 'development' ? 'https://mall.xvfin.com/api' : `https://mall.xvfin.com/api`
 // 创建axios 实例
@@ -71,7 +71,7 @@ service.interceptors.response.use(
 			switch(res.code) {
 				case 4001:   // token失效
 					setTimeout(()=>{
-						removeCookie('token');
+						Cookies.remove('token');
 						window.location.reload();
 					},2000)
 				break;

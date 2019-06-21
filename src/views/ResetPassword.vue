@@ -45,7 +45,7 @@
 import RellaxBanner from '@/components/RellaxBanner'
 import Modal from '@/components/Modal'
 import {resetPassword} from '@/api/public'
-import {removeCookie} from '@/utils/utils'
+// import {removeCookie} from '@/utils/utils'
 
 import translator from '../language/lib/reset_password'
 
@@ -71,7 +71,7 @@ export default {
         hideModal(){
             this.show = 0;
             if(this.isSussces) {
-                removeCookie('token');
+                Cookies.remove('token');
                 this.$router.push('/login')
             };
         },

@@ -72,9 +72,9 @@
         </div>
 
         <div class="about-scene">
-            <div class="about-scene-title is-size-2-touch">Which organisations accept IELTS scores?</div>
-            <div class="about-scene-small-title is-size-6-touch">Choosing IELTS gives you more options for the future. IELTS is accepted by more than 10,000 organisations in over 145 countries. </div>
-            <div class="about-scene-tips is-size-6-touch">This includes:</div>
+            <div class="about-scene-title is-size-2-touch">{{ $t('about-v5')}}</div>
+            <div class="about-scene-small-title is-size-6-touch">{{ $t('about-v6')}}</div>
+            <div class="about-scene-tips is-size-6-touch">{{ $t('about-v7')}}:</div>
             <div class="container">
                 <div class="about-list-item">
                     <div class="about-list-item-rect">
@@ -82,28 +82,28 @@
                     </div>
                     
                     <div class="about-list-item-number">01</div>
-                    <div class="about-list-item-text">Universities，schools，training colleges and tertiary institutes</div>
+                    <div class="about-list-item-text">{{ $t('about-v8')}}</div>
                 </div>
                 <div class="about-list-item">
                     <div class="about-list-item-rect">
                         <img src="../../public/images/about_5.png" alt="">
                     </div>
                     <div class="about-list-item-number about-list-item-number-1">02</div>
-                    <div class="about-list-item-text">Government departments and agencies</div>
+                    <div class="about-list-item-text">{{ $t('about-v9')}}</div>
                 </div>
                 <div class="about-list-item">
                     <div class="about-list-item-rect">
                         <img src="../../public/images/about_6.png" alt="">
                     </div>
                     <div class="about-list-item-number">03</div>
-                    <div class="about-list-item-text">Professional and industry bodies</div>
+                    <div class="about-list-item-text">{{ $t('about-v10')}}</div>
                 </div>
                 <div class="about-list-item">
                     <div class="about-list-item-rect">
                         <img src="../../public/images/about_7.png" alt="">
                     </div>
                     <div class="about-list-item-number about-list-item-number-1">04</div>
-                    <div class="about-list-item-text">companies and employers</div>
+                    <div class="about-list-item-text">{{ $t('about-v11')}}</div>
                 </div>
             </div>
             
