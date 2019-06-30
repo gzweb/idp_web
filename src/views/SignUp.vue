@@ -6,21 +6,21 @@
                 <img class="rellax-pic" src="../../public/images/login.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="title-style-1 is-size-1-desktop is-size-3-touch">Sign Up</div>
+                <div class="title-style-1 is-size-1-desktop is-size-3-touch">{{ $t('sg1') }}</div>
             </template>
         </RellaxBanner>
         <div class="rellax-page rellax-page-view">
             <div class="container">
                 <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
-                        <input name="firstName" v-validate="'required|alpha_spaces'" v-model="firstName" class="input" type="text" :placeholder="$t('validation-1')">
+                        <input name="firstName" v-validate="'required|alpha_spaces'" v-model="firstName" class="input capital-input" type="text" :placeholder="$t('validation-1')">
                         <div v-show="errors.has('firstName')" class="help is-danger">{{ $t('validation-1') }}</div>
                     </div>
                     
                 </div>
                 <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
-                        <input name="lastName" v-validate="'required|alpha_spaces'" v-model="lastName" class="input" type="text" :placeholder="$t('validation-2')">
+                        <input name="lastName" v-validate="'required|alpha_spaces'" v-model="lastName" class="input capital-input" type="text" :placeholder="$t('validation-2')">
                         <div class="application-tips">{{$t('s11')}}</div>
                         <div v-show="errors.has('lastName')" class="help is-danger">{{ $t('validation-2') }}</div>
                     </div>
@@ -28,14 +28,14 @@
 
                 <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
-                        <input name="nameNumber" v-validate="'required|alpha_num|min:4|max:4'" v-model="nameNumber" class="input" type="text" :placeholder="$t('validation-4')">
+                        <input name="nameNumber" v-validate="'required|alpha_num|min:4|max:4'" v-model="nameNumber" class="input capital-input" type="text" :placeholder="$t('validation-4')">
                         <div class="application-tips">{{$t('s14')}}</div>
                         <div v-show="errors.has('nameNumber')" class="help is-danger">{{ $t('validation-4') }}</div>
                     </div>
                 </div>
                 <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
-                        <input name="email" v-validate="'required|email'" v-model="email"  class="input" type="text" :placeholder="$t('validation-3')">
+                        <input name="email" v-validate="'required|email'" v-model="email"  class="input capital-input" type="text" :placeholder="$t('validation-3')">
                         <div class="application-tips">{{$t('s15')}}</div>
                         <div v-show="errors.has('email')" class="help is-danger">{{ $t('validation-3') }}</div>
                     </div>
@@ -66,6 +66,7 @@
                                 <img @click="setValidationImg" width="102" :src="codeSrc" alt="">
                             </div>
                         </div>
+                        <div class="application-tips">{{$t('s17')}}</div>
                         <div v-show="errors.has('code')" class="help is-danger">{{ $t('sg7') }}</div>
                     </div>
                     
@@ -78,7 +79,7 @@
                         <div class="button button-style is-fullwidth" @click="postData">{{$t('sg1')}}</div>
                     </div>
                 </div>
-                <div class="user-page-text text-style">{{$t('sg2')}}<router-link to="/login">{{$t('s1')}}</router-link></div>
+                <div class="user-page-text text-style">{{$t('sg2')}}<router-link to="/login"> {{$t('s1')}}</router-link></div>
                 
             </div>
         </div>

@@ -12,7 +12,10 @@
         
 
         <div class="rellax-page-view">
-            <div class="title-style-1 title-style-text">{{$t('table1')}}</div>
+            <!-- <div class="title-style-1 title-style-text">{{$t('table1')}}</div> -->
+
+            <div class="title-style-1 title-style-text">{{menuList[2]['value']}}</div>
+            <!-- <div class="container has-text-centered">{{ menuList[2]['value'] }}</div> -->
 
             <div class="container">
                 
@@ -90,7 +93,7 @@ export default {
     translator,
     data(){
         return {
-            menuList:[{},{}],
+            menuList:[{},{},{}],
             list:[]
         }
     },
@@ -100,7 +103,7 @@ export default {
         // Toast.clear();
         this.menuList = data.data[0]['value'];
         this.list = data.data.slice(1);
-        console.log(this.list);
+        console.log(data);
     },
     methods:{
         backTap(){

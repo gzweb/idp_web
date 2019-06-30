@@ -74,7 +74,7 @@
         <div class="about-scene">
             <div class="about-scene-title is-size-2-touch">{{ $t('about-v5')}}</div>
             <div class="about-scene-small-title is-size-6-touch">{{ $t('about-v6')}}</div>
-            <div class="about-scene-tips is-size-6-touch">{{ $t('about-v7')}}:</div>
+            <div class="about-scene-tips is-size-6-touch">{{ $t('about-v7')}}</div>
             <div class="container">
                 <div class="about-list-item">
                     <div class="about-list-item-rect">

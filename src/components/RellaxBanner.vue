@@ -1,7 +1,7 @@
 <template>
     <div class="rellax-view">
         <slot name="rellaxpic"></slot>
-        <div class="rellax-fixed-view" v-rellax="options">
+        <div class="rellax-fixed-view" id="rellax-fixed-view" v-rellax="options">
             <slot name="rellaxpic"></slot>
             <div class="rellax-text-view">
                 <slot name="rellaxtext"></slot>
@@ -13,8 +13,10 @@
 <script>
 import Vue from 'vue'
 import VueRellax from 'vue-rellax'
+import { setInterval, clearInterval } from 'timers';
 Vue.use(VueRellax)
 
+let timer;
 
 export default {
     data(){
@@ -23,6 +25,9 @@ export default {
                 speed:'2'
             }
         }
+    },
+    created(){
+        // console.log(this.getTop)
     }
 }
 </script>
@@ -49,7 +54,7 @@ export default {
         }
         .rellax-fixed-view {
             position: fixed;
-            top: 90px;
+            top: 0;
             left: 0;
             width: 100%;
             max-height: 450px;
@@ -81,7 +86,7 @@ export default {
                 height: 100%;
                 z-index: 1;
                 content: '';
-                background-color: rgba(0,0,0,.5);
+                background-color: rgba(0,0,0,.2);
             }
         }
     }

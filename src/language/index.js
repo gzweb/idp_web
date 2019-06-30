@@ -3,20 +3,21 @@ export default {
     cn : {
         s1:'登录',
         s2:'注册',
-        s3:'加入我们',
+        s3:'联络我们',
         s4:'关于IDP',
-        s5:'个人中心',
+        s5:'我的账户',
         s6:'信息提示', //弹窗标题
         s7:'退出登录',
         s8:'常见问题',
         s9:'提交',
         s10:'查看上传文件',
-        s11:'您必须输入注册身份证明文件中显示的姓名.',
+        s11:'您必须输入您在注册证件中显示的姓名.',
         s12:'首页',
         s13:'在线申请',
-        s14:'例如，护照号码是EE2468135，前4个字是EE24.',
+        s14:'如证件号码EE2468135，只须输入EE24。',
         s15:'您必须输入报名时的电子邮件地址',
-    
+        s16:'我们利用Cookies令你浏览网站时更感简便。<a class="cookie-link" href="https://www.idp.com/hongkong/cookies/" target="_blank">了解更多</a> 有关cookies的信息。',
+        s17:'点击验证码图片刷新验证码',
 
         'validation-1':'请填写英文姓氏',
         'validation-2':'请填写英文名字',
@@ -27,28 +28,30 @@ export default {
         'validation-7':'请选择测试类型',
 
 
-        'a-t-1':'成绩复核 (EOR)',
-        'a-t-2':'更改测试日期(TDT)',
-        'a-t-3':'测试费用退款',
-        'a-t-4':'申请额外成绩单',
-        'a-t-5':'个人成绩单快递服务'
+        // 'a-t-1':'成绩复核 (EOR)',
+        // 'a-t-2':'更改测试日期(TDT)',
+        // 'a-t-3':'测试费用退款',
+        // 'a-t-4':'申请额外成绩单',
+        // 'a-t-5':'个人成绩单快递服务'
     },
     zh : {
         s1:'登錄',
         s2:'註冊',
         s3:'聯絡我們',
         s4:'關於IDP',
-        s5:'個人中心',
+        s5:'我的賬戶',
         s6:'信息提示',
         s7:'退出',
         s8:'常見問題',
         s9:'提交',
         s10:'查看上載文件',
-        s11:'您必須輸入註冊身份證明文件中顯示的姓名.',
+        s11:'您必須輸入您在註冊證件中顯示的姓名.',
         s12:'首頁',
         s13:'網上申請',
-        s14:'例如，護照號碼是EE2468135，前4個字是EE24.',
+        s14:'如證件號碼EE2468135，只須輸入EE24。',
         s15:'您必須輸入報名時的電子郵件地址',
+        s16:'我們利用Cookies令你瀏覽網站時更感簡便。<a class="cookie-link" href="https://www.idp.com/hongkong/cookies/" target="_blank">了解更多</a> 有關cookies的資訊。',
+        s17:'點擊驗證碼圖片刷新驗證碼',
 
         'validation-1':'請填寫英文姓氏',
         'validation-2':'請填寫英文名字',
@@ -59,11 +62,11 @@ export default {
         'validation-7':'請選擇測試類型',
 
 
-        'a-t-1':'成績覆核(EOR)',
-        'a-t-2':'更改測試日期(TDT)',
-        'a-t-3':'測試費用退款',
-        'a-t-4':'申請額外成績單',
-        'a-t-5':'個人成績單快遞服務'
+        // 'a-t-1':'成績覆核(EOR)',
+        // 'a-t-2':'更改測試日期(TDT)',
+        // 'a-t-3':'測試費用退款',
+        // 'a-t-4':'申請額外成績單',
+        // 'a-t-5':'個人成績單快遞服務'
     },
     en : {
         s1:'Login',
@@ -72,15 +75,17 @@ export default {
         s4:'About IDP',
         s5:'My Account',
         s6:'Message Notification',
-        s7:'Exit',
-        s8:'FQA',
+        s7:'Sign Out',
+        s8:'FAQ',
         s9:'Submit',
         s10:'Preview Uploaded Files',
         s11:'You must enter your name as it appears in your registered ID document.',
         s12:'Home',
         s13:'Proceed to Apply Online',
-        s14:'E.g. for passport number: EE2468135,the first 4 characters are EE24.',
+        s14:'e.g. for passport number: EE2468135, only enter EE24.',
         s15:'You must enter the same email address as your test application.',
+        s16:'We use cookies to enhance your experience. <a class="cookie-link" href="https://www.idp.com/hongkong/cookies/" target="_blank">Find out more</a>  about cookies.',
+        s17:'Click verification code image to refresh verification code',
 
         'validation-1':'Family Name',
         'validation-2':'Given Name',
@@ -91,10 +96,10 @@ export default {
         'validation-7':'Test Type', 
 
 
-        'a-t-1':'Enquiry on Results (EOR)',
-        'a-t-2':'Test Date Transfer',
-        'a-t-3':'Test Fee Refund',
-        'a-t-4':'EXTRA TEST REPORT FORMS(REPRINT TRF)',
-        'a-t-5':'Courier Service for Your Test Report Form'
+        // 'a-t-1':'Enquiry on Results (EOR)',
+        // 'a-t-2':'Test Date Transfer',
+        // 'a-t-3':'Test Fee Refund',
+        // 'a-t-4':'EXTRA TEST REPORT FORMS(REPRINT TRF)',
+        // 'a-t-5':'Courier Service for Your Test Report Form'
     }
 }

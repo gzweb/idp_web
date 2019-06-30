@@ -39,15 +39,22 @@ export default new Vuex.Store({
 		isIndexFixed:0,
 		swiperIndex:0,
 		language:locale,
+		// isCookieTips:Cookies.get('cookietips') == 'false'?0:1,
+		isCookieTips:1,
 		isLogin:Cookies.get('token'),
-		includeList: []
+		includeList: [],
+		TestList:[{}],
+		appTop:0,
 	},
 	mutations: {
-		setIndexFixed( state, stutas ) { //设置首页导航透明
-			state.isIndexFixed = stutas
+		setAppTop(state ,stutas){  //设置高度
+			state.appTop = stutas;
 		},
-		setSwiperIndex( state, stutas ) {  //设置首页swiperKey
-			state.swiperIndex = stutas
+		setCookieTipsState(state ,stutas){  //设置登陆状态
+			state.isCookieTips = stutas
+		},
+		setTestList(state ,stutas){  //设置登陆状态
+			state.TestList = stutas
 		},
 		setLoginState(state ,stutas){  //设置登陆状态
 			state.isLogin = stutas

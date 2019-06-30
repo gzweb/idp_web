@@ -9,7 +9,7 @@
             <a href="https://www.idp.com/hongkong/disclaimer/" class="footer-link footer-column has-text-centered">Disclaimer</a>
             <a href="https://www.ieltsessentials.com/global/footerlinks/privacypolicy" class="footer-link footer-column has-text-centered">Privacy Policy</a>
             <a href="https://www.idp.com/hongkong/terms-of-use/" class="footer-link footer-column has-text-centered">Terms of Use</a>
-            <a href="https://www.idp.com/hongkong/" class="footer-link footer-column column-hidden has-text-centered">Personal Information Collection Statement</a>
+            <a :href="getLanguage == 'en'?'https://www.idp.com/hongkong/pics/?lang=en':'https://www.idp.com/hongkong/pics/'" class="footer-link footer-column column-hidden has-text-centered">Personal Information Collection Statement</a>
         </div>
         <div class="footer-tips">
             The website works best with following browsers: Internet Explorer 10 (or above) and all other major browsers currently available.
@@ -19,7 +19,11 @@
 
 <script>
 export default {
-
+    computed:{
+        getLanguage(){
+            return this.$store.state.language;
+        }
+    }
 }
 </script>
 

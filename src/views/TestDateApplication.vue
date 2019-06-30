@@ -6,7 +6,7 @@
                 <img class="rellax-pic" src="../../public/images/banner_1.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{$t('a-t-2')}}</div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestList['sector']&&getTestList['sector'][2]['name']}}</div>
                 <!-- <div class="rellax-text is-size-1-desktop is-size-3-touch">application</div> -->
             </template>
         </RellaxBanner>
@@ -18,20 +18,24 @@
 
             
             <div class="container form-view">
+                <div class="application-ctx" v-html="ruleCtx.notes"></div>
                 <div class="columns">
                     
                     
+                   
                     <div class="column">
                         <div class="control">
-                            <input name="lastName" v-validate="'required|alpha_spaces'" v-model="params.last_name" class="input" type="text" :placeholder="$t('validation-2')">
-                        </div>                       
-                        <div v-show="errors.has('lastName')" class="help is-danger">{{ $t('validation-2') }}</div>
-                    </div>
-                    <div class="column">
-                        <div class="control">
-                            <input name="firstName" v-model="params.first_name" v-validate="'required|alpha_spaces'" type="text" class="input" :placeholder="$t('validation-1')">
+                            <input name="last_name" v-model="params.last_name" v-validate="'required|alpha_spaces'" type="text" class="input" :placeholder="$t('validation-1')">
                         </div>
-                        <div v-show="errors.has('firstName')" class="help is-danger">{{ $t('validation-1') }}</div>
+                        <div class="application-tips">{{$t('s11')}}</div>
+                        <div v-show="errors.has('last_name')" class="help is-danger">{{ $t('validation-1') }}</div>
+                    </div>
+                     <div class="column">
+                        <div class="control">
+                            <input name="first_name" v-validate="'required|alpha_spaces'" v-model="params.first_name" class="input" type="text" :placeholder="$t('validation-2')">
+                        </div>           
+                        <div class="application-tips">{{$t('s11')}}</div>            
+                        <div v-show="errors.has('first_name')" class="help is-danger">{{ $t('validation-2') }}</div>
                     </div>
                 </div>
                 <div class="columns">
@@ -39,6 +43,7 @@
                         <div class="control">
                             <input name="nameNumber" v-validate="'required|alpha_num|min:4|max:4'" v-model="params.candidate_id" class="input" type="text" :placeholder="$t('validation-4')">
                         </div>
+                        <div class="application-tips">{{$t('s14')}}</div>
                         <div v-show="errors.has('nameNumber')" class="help is-danger">{{ $t('validation-4') }}</div>
                     </div>
                     <div class="column">
@@ -59,12 +64,12 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" :not-before="beforeTime" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div v-show="errors.has('testDate')" class="help is-danger">{{ $t('ap10') }}</div>
                     </div>
                     <div class="column">
-                        <date-picker name="newTestDate" v-validate="'required'" :editable="false" :placeholder="$t('ap11')" value-type="format" width="100%" :not-before="beforeTime" input-class="input" v-model="params.new_test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
-                        <div v-show="errors.has('newTestDate')" class="help is-danger">{{ $t('ap40') }}</div>
+                        <date-picker name="newTestDate" v-validate="'required'" :editable="false" :placeholder="$t('ap11')" value-type="format" width="100%" :not-before="maxTime" input-class="input" v-model="params.new_test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <div v-show="errors.has('newTestDate')" class="help is-danger">{{ $t('ap11') }}</div>
                     </div>
                 </div>
             </div>
@@ -125,10 +130,15 @@
                 </div>
 
               
-                
+                <template v-for="item in ruleCtx.files">
+                    <div class="additional-text">{{item.title}}</div>
+                    <div class="download-link-view">
+                        <a :href="items.link" v-for="(items,key) in item.files" :key="key" class="download-link">{{key+1}}. &nbsp;&nbsp;{{items.name}}</a>
+                    </div>
+                </template>
                 
                 <label class="bui-checkbox-label  bui-checkbox-anim">
-                    <input v-validate="'required'" type="checkbox" name="terms"/><i class="bui-checkbox"></i>  {{$t('ap6')}}<a target="_blank" href="https://www.idp.com/hongkong/terms-of-use/">Terms</a>  and <a target="_blank" href="https://www.ieltsessentials.com/global/footerlinks/privacypolicy">Privacy Policy</a>
+                    <input v-validate="'required'" type="checkbox" name="terms"/><i class="bui-checkbox"></i><a class="rule-link" href="#rule">{{$t('ap6')}}</a> 
                 </label>
                 <div class="control">
                     <div v-show="errors.has('terms')" class="help is-danger">{{ $t('ap4') }}</div>
@@ -139,9 +149,9 @@
                 <div @click="submitForm" class="button button-style is-medium">{{$t('s9')}}</div>
             </div>
 
-            <div class="container">
-                <div class="application-title" v-html="ruleCtx.title"></div>
-                <div class="application-ctx" v-html="ruleCtx.content"></div>
+            <div class="container" id="rule">
+                <div class="application-title" v-html="ruleCtx.terms.title"></div>
+                <div class="application-ctx" v-html="ruleCtx.terms.content"></div>
             </div>
             
 
@@ -181,12 +191,17 @@ export default {
     translator,
     data(){
         return {
-            ruleCtx:{},
+            ruleCtx:{
+                terms:{
+
+                }
+            },
             selectArr:[],
             selectArr1:[],
             uploadLink:'',
 
             beforeTime:new Date(),
+            maxTime:new Date(),
             modalShow:0,
             ctxMessage:'',
 
@@ -205,15 +220,20 @@ export default {
     computed:{
         getLanguage(){
             return (this.$store.state.language  == 'en'?'en':'zh')
+        },
+        getTestList(){
+            return this.$store.state.TestList
         }
     },
+    
     async created(){
         const data = await getApplicationInfo('TDT');
 
         this.selectArr = data.data.test_type;
         this.selectArr1 = data.data.reason;
 
-        this.ruleCtx = data.data.sector.terms
+        this.ruleCtx = data.data.sector
+
         // console.log(this.selectArr1)
     },
     methods:{
@@ -270,6 +290,16 @@ export default {
                 break;
                 case 'reason':
                     this.params.reason = e.target.value
+
+                    if(e.target.value == 'REQUEST'){
+                        this.params.test_date = '';
+                        const time = new Date();
+                        this.beforeTime = time.setDate(time.getDate()+35);
+                    }else{
+                        this.params.test_date = '';
+                        this.beforeTime = new Date();
+                    };
+                    
                 break;
             }
         },
@@ -303,6 +333,8 @@ export default {
                         return;
                     }
 
+                 
+
                     
 
                     const data = await postApplication('TDT',this.params);
@@ -313,6 +345,7 @@ export default {
                     this.modalShow = 1;
                     if(data.code != '0') {
                         this.ctxMessage = data.message;
+                        
                         return;
                     };
 

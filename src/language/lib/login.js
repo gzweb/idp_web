@@ -6,7 +6,8 @@ export default {
         "v4":"请输入电子邮件中收到的验证码",
         "v5":"请输入图形验证码",
         "v6":"忘记密码？",
-        "v7":"从电子邮件收到的验证码"
+        "v7":"从电子邮件收到的验证码",
+        'v8':'您必须输入注册的电子邮件地址'
     },
     "en":{
         "v1":"Login",
@@ -15,7 +16,8 @@ export default {
         "v4":"Email Code",
         "v5":"Verification Code",
         "v6":"Forgot your password?",
-        "v7":"Verification code received from email"
+        "v7":"Verification code received from email",
+        'v8':'You must enter your registered email address'
     },
     "zh":{
         "v1":"登錄",
@@ -24,6 +26,8 @@ export default {
         "v4":"請輸入電子郵件中收到的驗證碼",
         "v5":"請輸入圖形驗證碼",
         "v6":"忘記密碼？",
-        "v7":"從電子郵件收到的驗證碼"
+        "v7":"從電子郵件收到的驗證碼",
+        'v8':'您必須輸入註冊的電子郵件地址'
+
     }
 }

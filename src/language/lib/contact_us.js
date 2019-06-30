@@ -15,17 +15,17 @@ export default {
     },
     "en":{
         "cu1":"Opening Hours",
-        "cu2":"Mon-Thu 10:30am-7:00pm",
-        "cu3":"Fri 10:30-5:30pm",
-        "cu4":"Sat 10:00am-2:00pm",
-        "cu5":"Sunday & Public Holidays Closed",
+        "cu2":"Monday - Thursday:  10:30am - 7:00pm",
+        "cu3":"Friday:  10:30am - 5:30pm",
+        "cu4":"Saturday:  10:00am - 2:00pm",
+        "cu5":"Sunday & Public Holidays:  Closed",
         "cu6":"Our Information",
-        "cu7":"Address:Room 2807-09,Harbour Centre,25 Harbour Road,Wanchai,Hong Kong",
-        "cu8":"Phone: 2179 3600",
-        "cu9":"Fax: 2827 9286, 2827 2104",
-        "cu10":"Email:ieltsapps.hongkong@idp.com",
+        "cu7":"Address:  Room 2807-09,Harbour Centre,25 Harbour Road,Wanchai,Hong Kong",
+        "cu8":"Phone:  2179 3600",
+        "cu9":"Fax:  2827 9286, 2827 2104",
+        "cu10":"Email:  ieltsapps.hongkong@idp.com",
         "cu11":"Public Transportation to IDP",
-        "cu12":"BY MTR - Wan Chai Station (Exit A5) ; By Ferry -Star Ferry (Tsim Sha Tsui - Wan Chai Pier) ; By Bus -2A,2X,8,8P,40 (Get off at Wancai Ferry Pier) / 673,930,930A,930X,960,960S,N8 (Get off at Wanchai Ferry Pier) / 950,978A,978B,978 (Get off at Wanchai Trainning Pool)"
+        "cu12":"BY MTR - Wan Chai Station (Exit A5) ; By Ferry - Star Ferry (Tsim Sha Tsui - Wan Chai Pier) ; By Bus - 2A,2X,8,8P,40 (Get off at Wancai Ferry Pier) /673,930,930A,930X,960,960S,N8 (Get off at Wanchai Ferry Pier) / 950,978A,978B,978 (Get off at Wanchai Trainning Pool)"
     },
     "zh":{
         "cu1":"開放時間",

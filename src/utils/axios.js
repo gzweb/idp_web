@@ -19,7 +19,11 @@ const service = axios.create({
 
 let loadingCount = 0;  //laoding 计数器
 
-
+const errorCode = {
+	'1':1,
+	'6000':1,
+	'5000':1
+}
 
 
 // request 拦截器
@@ -65,8 +69,8 @@ service.interceptors.response.use(
 		if(res.code != 0) {
 
 			
-			
-			if(res.code != 1) {Toast(res.message);}
+			if(!errorCode[res.code]) {Toast(res.message)};
+			// if(res.code != 1 && res.code != 6000) {Toast(res.message);}
 			
 			switch(res.code) {
 				case 4001:   // token失效
@@ -76,7 +80,7 @@ service.interceptors.response.use(
 					},2000)
 				break;
 
-				case 4004:  // 
+				case 4004:  // 找不到数据
 					setTimeout(()=>{
 						router.push('/')
 					},2000)

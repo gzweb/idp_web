@@ -2,10 +2,10 @@
     <div class="navbar-item language-navbar-item is-paddingless">
         <div class="dropdown" :class="{'is-active':isLanguage}">
             <div class="dropdown-trigger is-hidden-mobile">
-                <div class="navbar-button" :class="{'navbar-button-active':isLanguage,'other-navbar-button':!type}" @click="isLanguage=!isLanguage">{{getLanguage}}</div>
+                <div class="navbar-button other-navbar-button" :class="{'navbar-button-active':isLanguage}" @click="isLanguage=!isLanguage">{{getLanguage}}</div>
             </div>
             <div class="dropdown-trigger is-hidden-tablet">
-                <div class="navbar-button" :class="{'navbar-button-active':isLanguage,'other-navbar-button':!type}" @click="isLanguage=!isLanguage">{{getLanguage}}</div>
+                <div class="navbar-button other-navbar-button" :class="{'navbar-button-active':isLanguage}" @click="isLanguage=!isLanguage">{{getLanguage}}</div>
             </div>
 
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-    props:['type'],
+    // props:['type'],
     data() {
 		return {
             isLanguage:0

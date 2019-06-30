@@ -1,7 +1,10 @@
 .application-view .application-title {
     margin: 20px 0;
-    padding: 0 20px;
     font-size: 30px;   
+}
+#app .rule-link {
+    margin-left: 10px;
+    color: #4a4a4a;
 }
 .application-view .file-cta,.application-view .file-name {
     height: 3rem;
@@ -15,6 +18,9 @@
     z-index: 2;
     background-color: white;
 }
+#app .download-link-view {
+    margin-bottom: 20px;
+}
 .application-view .application-ctx-text {
     margin-top: 10px;
 }
@@ -26,7 +32,7 @@
     margin-bottom: 20px;
 }
 .application-view .application-ctx {
-    padding: 0 20px;
+    /* padding: 0 20px; */
     margin-bottom: 50px;
 }
 .application-view .application-step-item {
@@ -100,7 +106,7 @@
 }
 .application-step-view {
     margin-top: 70px;
-    margin-bottom: 160px;
+    margin-bottom: 100px;
 }
 .application-view .application-step-text {
     position: absolute;

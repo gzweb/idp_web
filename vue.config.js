@@ -28,6 +28,10 @@ module.exports = {
                 `${cssHttp}swiper.min.css`
             ];
             
+            args[0].cdnJs.push(`${http}zepto.min.js`);
+            args[0].cdnJs.push(`${http}js.cookie.min.js`);
+            args[0].cdnJs.push(`${http}lodash.min.js`);
+            args[0].cdnJs.push(`${http}print.min.js`);
             
 
             if(process.env.NODE_ENV == 'production') {
@@ -47,9 +51,7 @@ module.exports = {
                 
             }
             
-            args[0].cdnJs.push(`${http}js.cookie.min.js`);
-            args[0].cdnJs.push(`${http}lodash.min.js`);
-            args[0].cdnJs.push(`${http}print.min.js`);
+            
 
             
 

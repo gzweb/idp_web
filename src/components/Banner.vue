@@ -16,7 +16,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
 
 
@@ -31,23 +30,19 @@
                         </div>
                     </div>
                 </swiper-slide>
-                <div class="swiper-pagination is-hidden-desktop" id="swiper-pagination" ></div>
+                <!-- <div class="swiper-pagination is-hidden-desktop" id="swiper-pagination" ></div> -->
+                <div class="swiper-pagination" id="swiper-pagination" ></div>
             </swiper>
-            <div class="container parent-swiper-menu is-hidden-touch">
+            <!-- <div class="container parent-swiper-menu is-hidden-touch">
                 <div class="container container-after">
                     <div class="columns is-gapless">
                         <div v-show="key > 0" @mouseenter="setSwiperPage(key)" class="column" v-for="(item,key) in bannerData.sector" :key="key">
-                            <!-- <div v-if="key == 0" class="column-item" :class="{'column-item-active':key == swiperIndex}">{{$t('a-t-1')}}</div>
-                            <div v-else-if="key == 1" class="column-item" :class="{'column-item-active':key == swiperIndex}">{{$t('a-t-2')}}</div>
-                            <div v-else-if="key == 2" class="column-item" :class="{'column-item-active':key == swiperIndex}">{{$t('a-t-3')}}</div>
-                            <div v-else-if="key == 3" class="column-item" :class="{'column-item-active':key == swiperIndex}">{{$t('a-t-4')}}</div>
-                            <div v-else-if="key == 4" class="column-item" :class="{'column-item-active':key == swiperIndex}">{{$t('a-t-5')}}</div> -->
                             <div class="column-item" :class="{'column-item-active':key == swiperIndex}">{{item.name}}</div>
                         </div>
                     </div>
                     
                 </div>
-            </div>
+            </div> -->
         </swiper-slide>
         <swiper-slide class="slide-auto parent-slide">
             <Footer />
@@ -62,7 +57,11 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 
 export default {
-    props:['bannerData'],
+    computed:{
+        bannerData(){
+            return this.$store.state.TestList
+        },
+    },
     data(){
         return {
             swiperIndex:0,
@@ -72,20 +71,26 @@ export default {
                 mousewheel: true,
                 on:{
                     reachBeginning: e =>{
-                        this.$store.commit('setIndexFixed',0)
-                        this.$store.commit('setSwiperIndex',0)
+                        
                     },
                     reachEnd: e =>{
-                        this.$store.commit('setIndexFixed',1)
-                        this.$store.commit('setSwiperIndex',1)
+                        
                     }
                 }
             },
             childConfig:{
                 effect:'fade',
                 lazy: true,
+                autoplay:{
+                    delay: 10000,
+                    stopOnLastSlide: false,
+                    disableOnInteraction: true,
+                },
                 pagination: {
                     el: '#swiper-pagination',
+                    clickable :true,
+                    bulletClass : 'my-bullet',
+                    bulletActiveClass: 'my-bullet-active'
                 },
                 on:{
                     slideChange: e =>{
@@ -113,10 +118,7 @@ export default {
     },
     created(){
         
-        
-        // this.$nextTick(()=>{
-        //     console.log($(window).height())
-        // })
+    
     },
     components:{
         swiper,
@@ -132,6 +134,29 @@ export default {
     #app .slide-auto {
         height: auto;
     }
+    .my-bullet {
+        position: relative;
+        display: inline-block;
+        width: 40px; 
+        height: 40px; 
+        margin: 0 5px;
+        cursor: pointer;
+        &::before {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            opacity: .4;
+            content: '';
+            background-color: white;
+        }
+    }
+    .my-bullet-active {
+        &::before {
+            opacity: 1;
+        }
+    }
     .parent-slide {
         overflow: hidden;
         .child-swiper {
@@ -142,7 +167,7 @@ export default {
         }
         .column {
             position: relative;
-            cursor: pointer;
+            // cursor: pointer;
         }
         .column-item {
             margin-right: 50px;
@@ -212,7 +237,7 @@ export default {
                 height: 100%;
                 content: '';
                 z-index: 1;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.3);
             }
         }
         .slide-ctx {
@@ -229,7 +254,7 @@ export default {
             flex-direction:column;
         }
         .slide-text {
-            margin-top: -100px;
+            margin-top: 50px;
             width: 66%;
             text-align: center;
             color: white;
@@ -243,12 +268,13 @@ export default {
             text-align: center;
             color: white;
             cursor: pointer;
-            border: 1px solid white;
+            // border: 1px solid white;
+            background: #E31B38;
             border-radius: 35px;
             transition: all 0.5s;
             &:hover {
-                border: 1px solid #D71735;
-                color: #D71735;
+                // border: 1px solid #D71735;
+                transform: translate3d(0,-6px,0);
             }
         }
         .slide-img {

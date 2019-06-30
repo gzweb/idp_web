@@ -14,6 +14,7 @@
                 <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
                         <input name="email" v-model="email" v-validate="'required|email'" class="input" type="text" :placeholder="$t('v2')">
+                        <div class="application-tips">{{$t('v8')}}</div>
                         <div v-show="errors.has('email')" class="help is-danger">{{ $t('v2') }}</div>
                     </div>
                     
@@ -64,6 +65,7 @@
                                 <img @click="setValidationImg" width="102" :src="codeSrc" alt="">
                             </div>
                         </div>
+                        <div class="application-tips">{{$t('s17')}}</div>
                         <div v-show="errors.has('code')" class="help is-danger">{{ $t('v5') }}</div>
                     </div>
                     

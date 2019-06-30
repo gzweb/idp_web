@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{paddingTop:getTop+'px'}">
     <!-- <router-view/> -->
 
     <keep-alive :include="includeList">
@@ -11,9 +11,17 @@
 <script>
 export default {
   name: "App",
+  data(){
+    return {
+        paddingTop:'0'
+    }
+  },
 	computed:{
 		includeList(){
 			return this.$store.state.includeList
+    },
+    getTop(){
+			return this.$store.state.appTop
 		}
 	}
 };
@@ -36,25 +44,28 @@ html {
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  .fixed-view {
-    padding-top: 90px;
-  }
   .application-tips {
     font-size: 14px;
     color: #9AA8B3;
   }
-  .input {
+  .application-page .input,.application-page .textarea,.capital-input  {
+    text-transform:uppercase;
+  }.input {
     height: 3rem;
     box-shadow: none;
     color: #242c32;
+    
     border-color: #aab3bb;
   }
+ 
   .file-cta,.file-name {
     border-color: #aab3bb;
   }
-  ::-webkit-input-placeholder {
+  ::-webkit-input-placeholder,::-webkit-textarea-placeholder {
     color: #697782;
+    text-transform:none;
   }
+  
   .select select {
     height: 3rem;
     border-color: #aab3bb;
@@ -127,6 +138,10 @@ html {
 
 @media screen and (max-width: 768px) {
   #app {
+    .application-view .application-ctx,.application-view .application-title {
+        padding: 0 20px;
+    }
+    
     .rellax-pic {
       height: 250px;
     }
@@ -141,6 +156,9 @@ html {
     .faq-wrap {
       width: 90%;
       margin: 0 auto;
+    }
+    .contact-us-item {
+      margin-top: 0 !important;
     }
     .slide-button {
       width: 240px;
