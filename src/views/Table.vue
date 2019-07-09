@@ -6,7 +6,6 @@
                 <img class="rellax-pic" src="../../public/images/banner_7.png" alt="">
             </template>
             
-            
         </RellaxBanner>
 
         <div class="rellax-page-view">
