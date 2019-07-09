@@ -9,8 +9,6 @@
             
         </RellaxBanner>
 
-        
-
         <div class="rellax-page-view">
             <!-- <div class="title-style-1 title-style-text">{{$t('table1')}}</div> -->
 
