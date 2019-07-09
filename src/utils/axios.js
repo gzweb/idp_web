@@ -4,7 +4,7 @@ import router from '../router'
 import { Toast } from 'vant';
 // import { removeCookie } from './utils';
 
-const url = process.env.NODE_ENV == 'development' ? 'https://mall.xvfin.com/api' : `https://mall.xvfin.com/api`
+const url = process.env.NODE_ENV == 'development' ? 'https://mall.xvfin.com/api' : `https://services.ieltshongkong.hk/api`
 // 创建axios 实例
 const lang = {
 	'cn':'sc',
