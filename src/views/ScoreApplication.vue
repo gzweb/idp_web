@@ -51,14 +51,47 @@
                     <div class="column">
                         <div class="field has-addons">
                             <div class="control is-expanded">
-                                <div class="select is-fullwidth">
+
+								<div class="columns">
+                                    <div class="column is-4">
+                                        <div class="select is-fullwidth">
+											<select name="params.test_type_1" v-validate="'required'" v-model="test_type_1" @change="selectChange">
+												<option disabled value="">{{$t('validation-7')}}</option>
+												<option :value="key" v-for="(item,key) in selectArr" :key="key">
+													{{key}}
+												</option>
+											</select>
+										</div>
+                                    </div>
+                                    <div class="column is-4">
+										<div class="select is-fullwidth">
+											<select name="params.test_type_2" v-validate="'required'" v-model="test_type_2" @change="selectChange">
+												<option disabled value="">{{$t('validation-7')}}</option>
+												<option :value="key" v-for="(item,key) in selectTypeArr1" :key="key">
+													{{key}}
+												</option>
+											</select>
+										</div>
+									</div>
+                                    <div class="column is-4">
+										<div class="select is-fullwidth">
+											<select name="params.test_type" v-validate="'required'" v-model="params.test_type" @change="selectChange">
+												<option disabled value="">{{$t('validation-7')}}</option>
+												<option :value="item" v-for="(item,key) in selectTypeArr2" :key="key">
+													{{key}}
+												</option>
+											</select>
+										</div>
+									</div>
+                                </div>
+                                <!-- <div class="select is-fullwidth">
                                     <select name="params.test_type" v-validate="'required'" v-model="params.test_type" @change="selectChange">
                                         <option disabled value="">{{$t('validation-7')}}</option>
                                         <option :value="item.value" v-for="(item,key) in selectArr" :key="key">
                                             {{item.text}}
                                         </option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                         
                         </div>
@@ -226,7 +259,11 @@ export default {
                 terms:{
 
                 }
-            },
+			},
+			test_type_1:'',
+            test_type_2:'',
+            selectTypeArr1:[],
+            selectTypeArr2:[],
             // beforeTime:new Date(),
 
             modalShow:0,
@@ -255,13 +292,15 @@ export default {
     async created(){
         
 
-        const data = await getApplicationInfo('EOR');
+		const data = await getApplicationInfo('EOR');
+		
 
         this.ruleCtx = data.data.sector
         this.selectArr = data.data.test_type
         this.selectArr1 = data.data.refund_type
         this.selectArr2 = data.data.components
         this.selectArr3 = data.data.refund_payee_name;
+
 
 
 
@@ -278,10 +317,31 @@ export default {
     },
     methods:{
         selectChange(e){
+
+            if(!e.target.name.indexOf('params.test_type')) {
+            
+
+                switch(e.target.name) {
+                    case 'params.test_type':
+                            this.params.test_type = e.target.value;
+                        break;
+                    case 'params.test_type_1':
+                            this.params.test_type = '';
+                            this.test_type_2 = '';
+                            this.selectTypeArr1 = this.selectArr[e.target.value];
+                        break;
+                    case 'params.test_type_2':
+                            this.params.test_type = '';
+                            this.selectTypeArr2 = this.selectTypeArr1[e.target.value];
+                        break;
+                };
+            };
+
+
             switch(e.target.name) {
-                case 'params.test_type':
-                    this.params.test_type = e.target.value
-                break;
+                // case 'params.test_type':
+                //     this.params.test_type = e.target.value
+                // break;
                 case 'params.refund_type':
                     this.params.refund_type = e.target.value
                 break;

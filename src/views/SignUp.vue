@@ -11,7 +11,7 @@
         </RellaxBanner>
         <div class="rellax-page rellax-page-view">
             <div class="container">
-                <div class="columns">
+                <!-- <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
                         <input name="firstName" v-validate="'required|alpha_spaces'" v-model="firstName" class="input capital-input" type="text" :placeholder="$t('validation-1')">
                         <div v-show="errors.has('firstName')" class="help is-danger">{{ $t('validation-1') }}</div>
@@ -32,7 +32,7 @@
                         <div class="application-tips">{{$t('s14')}}</div>
                         <div v-show="errors.has('nameNumber')" class="help is-danger">{{ $t('validation-4') }}</div>
                     </div>
-                </div>
+                </div> -->
                 <div class="columns">
                     <div class="column is-10-touch is-6-desktop">
                         <input name="email" v-validate="'required|email'" v-model="email"  class="input capital-input" type="text" :placeholder="$t('validation-3')">
@@ -143,9 +143,9 @@ export default {
                     const data = await signUp({
                         email:this.email,
                         password:this.password,
-                        first_name:this.firstName,
-                        last_name:this.lastName,
-                        candidate_id:this.nameNumber,
+                        // first_name:this.firstName,
+                        // last_name:this.lastName,
+                        // candidate_id:this.nameNumber,
                         captcha:this.code,
                         captcha_id:this.codeID
                     });

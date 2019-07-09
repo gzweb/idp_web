@@ -63,16 +63,48 @@
                         <div class="field has-addons">
                             <div class="control is-expanded">
                                 <div class="select is-fullwidth">
-                                    <select name="testType" v-validate="'required'" v-model="params.test_type" @change="selectChange">
+                                    <div class="columns">
+                                        <div class="column is-4">
+                                            <div class="select is-fullwidth">
+                                                <select name="params.test_type_1" v-validate="'required'" v-model="test_type_1" @change="selectChange">
+                                                    <option disabled value="">{{$t('validation-7')}}</option>
+                                                    <option :value="key" v-for="(item,key) in selectArr" :key="key">
+                                                        {{key}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="column is-4">
+                                            <div class="select is-fullwidth">
+                                                <select name="params.test_type_2" v-validate="'required'" v-model="test_type_2" @change="selectChange">
+                                                    <option disabled value="">{{$t('validation-7')}}</option>
+                                                    <option :value="key" v-for="(item,key) in selectTypeArr1" :key="key">
+                                                        {{key}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="column is-4">
+                                            <div class="select is-fullwidth">
+                                                <select name="params.test_type" v-validate="'required'" v-model="params.test_type" @change="selectChange">
+                                                    <option disabled value="">{{$t('validation-7')}}</option>
+                                                    <option :value="item" v-for="(item,key) in selectTypeArr2" :key="key">
+                                                        {{key}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <select name="testType" v-validate="'required'" v-model="params.test_type" @change="selectChange">
                                         <option disabled value="">{{$t('validation-7')}}</option>
                                         <option :value="item.value" v-for="(item,key) in selectArr" :key="key">
                                             {{item.text}}
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                         </div>
-                        <div v-show="errors.has('testType')" class="help is-danger">{{ $t('validation-7') }}</div>
+                        <div v-show="errors.has('params.test_type')" class="help is-danger">{{ $t('validation-7') }}</div>
                     </div>
                 </div>
 
@@ -232,6 +264,11 @@ export default {
                 test_type:'',
                 courier_destination:''
             },
+
+            test_type_1:'',
+            test_type_2:'',
+            selectTypeArr1:[],
+            selectTypeArr2:[],
             // beforeTime:new Date(),
             modalShow:0,
             ctxMessage:'',
@@ -272,13 +309,36 @@ export default {
             };
         },
         selectChange(e){
-            switch(e.target.name) {
-                case 'testType':
-                    this.params.testType = e.target.value
-                break;
-            }
+
+            
+             if(!e.target.name.indexOf('params.test_type')) {
+            
+
+                switch(e.target.name) {
+                    case 'params.test_type':
+                            this.params.test_type = e.target.value;
+                        break;
+                    case 'params.test_type_1':
+                            this.params.test_type = '';
+                            this.test_type_2 = '';
+                            this.selectTypeArr1 = this.selectArr[e.target.value];
+                        break;
+                    case 'params.test_type_2':
+                            this.params.test_type = '';
+                            this.selectTypeArr2 = this.selectTypeArr1[e.target.value];
+                        break;
+                };
+            };
+
+            // switch(e.target.name) {
+            //     case 'testType':
+            //         this.params.testType = e.target.value
+            //     break;
+            // }
         },
         submitForm(){
+            
+            console.log(this.params);
             
             this.$validator.validateAll().then(async res => {
                 if (res) {
