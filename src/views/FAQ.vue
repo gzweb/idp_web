@@ -34,10 +34,10 @@
             <div class="container faq-wrap" v-for="(item,key) in list" :key="key">
                 <div class="faq-content-title">{{item.group}}</div>
                 <div class="faq-content-item" v-for="(items,index) in item.list" :key="index">
-                    <div :class="{'is-faq-active':item.isChecked}" class="faq-content-item-title" @click="showItem(key)">
+                    <div :class="{'is-faq-active':items.isChecked}" class="faq-content-item-title" @click="showItem(key,index)">
                         {{items.question}}
                     </div>
-                    <div v-show="item.isChecked" class="faq-content-item-ctx" v-html="items.answer"></div>
+                    <div v-show="items.isChecked" class="faq-content-item-ctx" v-html="items.answer"></div>
                 </div>
             </div>
             
@@ -69,12 +69,15 @@ export default {
         const data = await getFQA();
         console.log(data);
         this.list = data.data;
+        console.log(this.list)
     },
     methods:{
-        showItem(key){
+        showItem(key,index){
             // item.isChecked = !isChecked;
 
-            this.$set(this.list[key], `isChecked`, !this.list[key]['isChecked'])
+            
+            console.log(this.list[key]['list'][index])
+            this.$set(this.list[key]['list'][index], `isChecked`, !this.list[key]['list'][index]['isChecked'])
         }
     }
 }
