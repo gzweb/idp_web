@@ -19,8 +19,8 @@ module.exports = {
     chainWebpack: config => {
         config.plugin('html').tap(args => {
 
-            let http = 'https://mall.xvfin.com/html/js/',
-                cssHttp = 'https://mall.xvfin.com/html/css/';
+            let http = 'https://services.ieltshongkong.hk/html/js/',
+                cssHttp = 'https://services.ieltshongkong.hk/html/css/';
             
             args[0].cdnJs = [];
             args[0].cdnCss = [
