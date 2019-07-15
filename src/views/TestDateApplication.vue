@@ -34,7 +34,7 @@
                         <div class="control">
                             <input name="first_name" v-validate="'required|alpha_spaces'" v-model="params.first_name" class="input" type="text" :placeholder="$t('validation-2')">
                         </div>           
-                        <div class="application-tips">{{$t('s11')}}</div>            
+                        <div class="application-tips">{{$t('s18')}}</div>            
                         <div v-show="errors.has('first_name')" class="help is-danger">{{ $t('validation-2') }}</div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                                     <div class="column is-4">
 										<div class="select is-fullwidth">
 											<select name="params.test_type_2" v-validate="'required'" v-model="test_type_2" @change="selectChange">
-												<option disabled value="">{{$t('validation-7')}}</option>
+												<option disabled value="">{{$t('validation-8')}}</option>
 												<option :value="key" v-for="(item,key) in selectTypeArr1" :key="key">
 													{{key}}
 												</option>
@@ -74,7 +74,7 @@
                                     <div class="column is-4">
 										<div class="select is-fullwidth">
 											<select name="params.test_type" v-validate="'required'" v-model="params.test_type" @change="selectChange">
-												<option disabled value="">{{$t('validation-7')}}</option>
+												<option disabled value="">{{$t('validation-9')}}</option>
 												<option :value="item" v-for="(item,key) in selectTypeArr2" :key="key">
 													{{key}}
 												</option>

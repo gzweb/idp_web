@@ -35,7 +35,11 @@
                 
             </div>
         </div>
-        <Modal :ctxMessage="ctxMessage" :show="show" @hideModal="hideModal" />
+        <Modal :ctxMessage="ctxMessage" :show="show" @hideModal="hideModal">
+            <template>
+                {{$t('r-p-5')}}
+            </template>
+        </Modal>
         <Footer />
     </div>
 </template>

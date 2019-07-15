@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-view">
                 <div class="modal-view-title">
-                    {{$t('s6')}}
+                    <slot>{{$t('s6')}}</slot>
                     <div class="delete is-medium" @click="hideModal"></div>
                 </div>
                 <div class="modal-view-ctx" v-html="ctxMessage"></div>

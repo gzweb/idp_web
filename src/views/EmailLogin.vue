@@ -88,7 +88,7 @@ export default {
                         return;
                     };
 
-                    Cookies.set('token', data.data.token, { expires: 0.5 });
+                    Cookies.set('token', data.data.token);
                     // setCookie('token',data.data.token,0.5);
                     this.$store.commit('setLoginState',data.data.token);
 
