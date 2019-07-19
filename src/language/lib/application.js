@@ -50,7 +50,12 @@ export default {
         "ap48":"省/州/地区",
         "ap49":"城市/郊区/城镇",
         "ap50":"邮编/区号",
-        "ap51":'请输入具体原因'
+        "ap51":'请输入具体原因',
+        "ap52":'如成绩有所提升，你将获退还覆核费用。一般情况下会以支票作退款方法。',
+        "ap53":'本人确认没有持有于香港本地银行的私人储蓄户口及需以现金退款。',
+        "ap54":'原定的考试日期',
+        "ap55":'新的考试日期',
+        "ap56":'请于<a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a>查看本中心最新的考试日期',
     },
     "en":{
         "ap1":"Choose the Type of Refund",
@@ -103,7 +108,12 @@ export default {
         "ap48":"Province/State/Region",
         "ap49":"City/Suburb/Town",
         "ap50":"Postal Code/ZIP",
-        "ap51":'Please detail your grounds for applying a refund.'
+        "ap51":'Please detail your grounds for applying a refund.',
+        "ap52":'You will receive a full refund of the administrative fee if your score on any component is increased after re-marking.  The refund will be made by cheque under normal circumstances.',
+        "ap53":'I declare that I do not have a local bank account in Hong Kong and request the refund in cash.',
+        "ap54":'Scheduled Test Date',
+        "ap55":'Preferred New Test Date',
+        "ap56":'Please go to <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a>for the latest test session availability of our Test Centre',
     },
     "zh":{
         "ap1":"選擇退款類型",
@@ -156,6 +166,11 @@ export default {
         "ap48":"省/州/地區",
         "ap49":"城市/郊區/城鎮",
         "ap50":"郵編/區號",
-        "ap51":'請輸入具體原因'
+        "ap51":'請輸入具體原因',
+        "ap52":'如成績有所提升，你將獲退還覆核費用。一般情況下會以支票作退款方法。',
+        "ap53":'本人確認沒有持有於香港本地銀行的私人儲蓄戶口及需以現金退款。',
+        "ap54":'原定的考試日期',
+        "ap55":'新的考試日期',
+        "ap56":'請於<a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a>查看本中心最新的考試日期',
     }
 }

@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
 		}
 			// !token?next('/login'):next() 
 	}else{
-		if( (token && to.name == 'Login') || (token && to.name == 'SignUp')) {next('/');return} //解决登陆后 禁止去登陆页和注册页
+		if( (token && to.name == 'Login') || (token && to.name == 'SignUp')) {next('/index');return} //解决登陆后 禁止去登陆页和注册页
 		next();
 	}
 	

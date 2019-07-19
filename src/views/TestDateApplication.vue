@@ -6,7 +6,7 @@
                 <img class="rellax-pic" src="../../public/images/banner_1.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestList['sector']&&getTestList['sector'][2]['name']}}</div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestTile}}</div>
                 <!-- <div class="rellax-text is-size-1-desktop is-size-3-touch">application</div> -->
             </template>
         </RellaxBanner>
@@ -98,11 +98,14 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" :not-before="beforeTime" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" :not-before="beforeTime" :not-after="maxTime" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <div class="application-tips">{{$t('ap54')}}</div>        
                         <div v-show="errors.has('testDate')" class="help is-danger">{{ $t('ap10') }}</div>
                     </div>
                     <div class="column">
-                        <date-picker name="newTestDate" v-validate="'required'" :editable="false" :placeholder="$t('ap11')" value-type="format" width="100%" :not-before="maxTime" input-class="input" v-model="params.new_test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="newTestDate" v-validate="'required'" :editable="false" :placeholder="$t('ap11')" value-type="format" width="100%" :not-before="beforeTime1" :not-after="maxTime1" input-class="input" v-model="params.new_test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <div class="application-tips">{{$t('ap55')}}</div>  
+                        <div class="application-tips" v-html="$t('ap56')"></div>    
                         <div v-show="errors.has('newTestDate')" class="help is-danger">{{ $t('ap11') }}</div>
                     </div>
                 </div>
@@ -240,8 +243,10 @@ export default {
             selectArr1:[],
             uploadLink:'',
 
-            beforeTime:new Date(),
-            maxTime:new Date(),
+            beforeTime:'',
+            maxTime:'',
+            beforeTime1:'',
+            maxTime1:'',
             modalShow:0,
             ctxMessage:'',
 
@@ -263,10 +268,27 @@ export default {
         },
         getTestList(){
             return this.$store.state.TestList
+        },
+        getTestTile(){
+            return this.$store.state.testTile
         }
     },
     
     async created(){
+
+
+        let t1 = new Date();
+        let t2 = new Date();
+        let t3 = new Date();
+        let t4 = new Date();
+
+        this.beforeTime = t1.setDate(t1.getDate() - 7)
+        this.maxTime = t2.setDate(t2.getDate() + 365)
+
+        this.beforeTime1 = t3.setDate(t3.getDate() +2)
+        this.maxTime1 = t4.setDate(t4.getDate() + 365)
+
+
         const data = await getApplicationInfo('TDT');
 
         this.selectArr = data.data.test_type;
@@ -352,33 +374,33 @@ export default {
                 case 'reason':
                     this.params.reason = e.target.value
 
-                    if(e.target.value == 'REQUEST'){
-                        this.params.test_date = '';
-                        const time = new Date();
-                        this.beforeTime = time.setDate(time.getDate()+35);
-                    }else{
-                        this.params.test_date = '';
-                        this.beforeTime = new Date();
-                    };
+                    // if(e.target.value == 'REQUEST'){
+                    //     this.params.test_date = '';
+                    //     const time = new Date();
+                    //     this.beforeTime = time.setDate(time.getDate()+35);
+                    // }else{
+                    //     this.params.test_date = '';
+                    //     this.beforeTime = new Date();
+                    // };
                     
                 break;
             }
         },
         hideModal(){
             this.modalShow = 0;
-            if(this.isSuccess) {
+            // if(this.isSuccess) {
                 
-                let path;
-                switch(this.isSuccess){
-                    case 1:
-                        path =  `/price_table/${this.dataID}`
-                    break;
-                    case 2:
-                        path = `/table/${this.dataID}`
-                    break;
-                }
-                this.$router.replace(path)
-            };
+            //     let path;
+            //     switch(this.isSuccess){
+            //         case 1:
+            //             path =  `/price_table/${this.dataID}`
+            //         break;
+            //         case 2:
+            //             path = `/table/${this.dataID}`
+            //         break;
+            //     }
+            //     this.$router.replace(path)
+            // };
         },
         async submitForm(){
 
@@ -403,23 +425,40 @@ export default {
                     
                     
 
-                    this.modalShow = 1;
+                    
                     if(data.code != '0') {
+                        this.modalShow = 1;
                         this.ctxMessage = data.message;
-                        
                         return;
                     };
 
+                    console.log(data);
+
+                    let path;
 
                     if(data.data.to_pay) {
-                        this.isSuccess = 1;
+                        path =  `/price_table/${data.data.id}`
                     }else{
-                        this.isSuccess = 2;
-                    };
+                        if(data.data.to_confirm) {
+                            path = `/table/${data.data.id}?isConfirm=1`
+                        }else{
+                            path = `/table/${data.data.id}`
+                        }
+                    }
+                   
+                    this.$router.replace(path)
 
-                    this.dataID = data.data.id;
+
+
+                    // if(data.data.to_pay) {
+                    //     this.isSuccess = 1;
+                    // }else{
+                    //     this.isSuccess = 2;
+                    // };
+
+                    // this.dataID = data.data.id;
                     
-                    this.ctxMessage = this.$t('ap16');
+                    // this.ctxMessage = this.$t('ap16');
 
                     
                 }

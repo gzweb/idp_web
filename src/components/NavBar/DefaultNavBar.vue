@@ -159,6 +159,9 @@ export default {
             if(this.getTestList['banner'][key]['external']) {
                 window.location.href = this.getTestList['banner'][key]['jump_url']
             }else{
+
+                // console.log(key,this.getTestList['banner'])
+
                 this.$router.push({
                     path:this.getTestList['banner'][key]['jump_url']
                 })
@@ -239,23 +242,35 @@ export default {
             this.$store.commit('setAppTop', height)            
         });
 
+
+
+
+        let str;
+
         switch(this.$route.name) {
             case 'ScoreApplication':
-                this.navbarKey = 1;
+                str = '/score_application'
             break;
             case 'TestDateApplication':
-                this.navbarKey = 2;
+                str = '/test_date_application'
             break;
             case 'RefundApplication':
-                this.navbarKey = 3;
+                str = '/refund_application'
             break;
             case 'AdditionalTestApplication':
-                this.navbarKey = 4;
+                str = '/additional_test_application'
             break;
             case 'PostScoreApplication':
-                this.navbarKey = 5;
+                str = '/post_score_application'
             break;
         }
+
+        this.navbarKey = _.findIndex(this.getTestList['banner'], function(o) { return o.jump_url == str });
+        this.$store.commit('setTestTile', this.getTestList['sector'][this.navbarKey]['name'])  
+        
+        
+
+        
     },
     components:{
         Language,

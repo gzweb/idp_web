@@ -59,6 +59,10 @@
                             <div class="column is-hidden-touch">
                                 <div class="button button-style table-button" @click="print">{{$t('table3')}}</div>
                             </div>
+
+                            <div class="column" v-if="this.isConfirm">
+                                <div class="button button-style table-button" @click="postOrder">{{$t('table6')}}</div>
+                            </div>
                            
                         </div>
                     </div>
@@ -74,11 +78,16 @@
 
 <script>
 
-
+import Vue from 'vue'
 import '../css/table.css'
 import RellaxBanner from '@/components/RellaxBanner'
-import {getApplicationCtx} from '@/api/home'
+import {getApplicationCtx,confirmOrder} from '@/api/home'
 import translator from '../language/lib/table'
+import { Toast } from 'vant';
+
+Vue.use(Toast);
+
+
 
 
 
@@ -91,18 +100,52 @@ export default {
     data(){
         return {
             menuList:[{},{},{}],
-            list:[]
+            list:[],
+            isConfirm:this.$route.query.isConfirm
+        }
+    },
+    watch:{
+        '$route':function(){
+            this.isConfirm = 0;
         }
     },
     async created(){
-        // Toast.loading();
-        const data = await getApplicationCtx(this.$route.params.id)
+        
+        const data = await getApplicationCtx(this.$route.params.id,{
+            confirm:this.isConfirm?1:0
+        })
         // Toast.clear();
+        
+
+        // console.log(this.$route.path);
+        // console.log(data);
+        
         this.menuList = data.data[0]['value'];
         this.list = data.data.slice(1);
-        console.log(data);
+        
     },
     methods:{
+        async postOrder(){
+        
+            
+            const data = await confirmOrder(this.$route.params.id,{
+                id:this.$route.params.id
+            });
+
+            Toast(data.message);
+
+            this.$router.push({
+                path:this.$route.path
+            })
+            
+
+
+
+            // setTimeout(()=>{
+            //     this.$router.go(-1);
+            // },1000);
+            
+        },
         backTap(){
             // this.$router.go(-1);
             this.$router.push('/home')

@@ -6,7 +6,7 @@
                 <img class="rellax-pic" src="../../public/images/banner_3.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestList['sector']&&getTestList['sector'][5]['name']}}</div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestTile}}</div>
                 <!-- <div class="rellax-text is-size-1-desktop is-size-3-touch">Form by courier service</div> -->
             </template>
         </RellaxBanner>
@@ -56,7 +56,7 @@
                 <div class="columns">
                     
                     <div class="column">
-                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="testDate" :not-before="beforeTime" :not-after="maxTime" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div v-show="errors.has('testDate')" class="help is-danger">{{ $t('validation-6') }}</div>
                     </div>
                     <div class="column">
@@ -137,24 +137,28 @@
                         <div class="control">
                             <input class="input" v-model="params.country" name="Country" v-validate="'required'" type="text" :placeholder="$t('ap47')">
                         </div>
+                        <div class="application-tips">{{$t('ap47')}}</div>
                         <div v-show="errors.has('Country')" class="help is-danger">{{ $t('ap47') }}</div>
                     </div>
                     <div class="column is-3">
                         <div class="control">
                             <input class="input" v-model="params.province" name="Province" v-validate="'required'" type="text" :placeholder="$t('ap48')">
                         </div>
+                        <div class="application-tips">{{$t('ap48')}}</div>
                         <div v-show="errors.has('Province')" class="help is-danger">{{ $t('ap48') }}</div>
                     </div>
                     <div class="column is-3">
                         <div class="control">
                             <input class="input" v-model="params.city" name="City" v-validate="'required'" type="text" :placeholder="$t('ap49')">
                         </div>
+                        <div class="application-tips">{{$t('ap49')}}</div>
                         <div v-show="errors.has('City')" class="help is-danger">{{ $t('ap49') }}</div>
                     </div>
                     <div class="column is-3">
                         <div class="control">
                             <input class="input" v-model="params.zip_code" name="zip" v-validate="'required'" type="text" :placeholder="$t('ap50')">
                         </div>
+                        <div class="application-tips">{{$t('ap50')}}</div>
                         <div v-show="errors.has('zip')" class="help is-danger">{{ $t('ap50') }}</div>
                     </div>
                     
@@ -173,7 +177,8 @@
                             <input class="input" name="address" v-validate="'required'" v-model="params.address"  type="text" :placeholder="$t('ap29')">
                         </div>
                         <!-- <div class="application-tips">{{$t('ap45')}}</div> -->
-                        <div class="tips">{{$t('ap30')}}</div>
+                        <!-- <div class="tips">{{$t('ap30')}}</div> -->
+                        <div class="application-tips">{{$t('ap30')}}</div>
                         <div v-show="errors.has('address')" class="help is-danger">{{ $t('ap29') }}</div>
                     </div>
                 </div>
@@ -182,11 +187,13 @@
                 <div class="columns">
                     <div class="column is-2">
                         <input class="input" type="text" v-model="params.countryCode" :placeholder="$t('ap46')">
+                        <div class="application-tips">{{$t('ap46')}}</div>
                     </div>
                     <div class="column is-10">
                         <div class="control">
                             <input class="input" v-model="params.tel" name="tel" v-validate="'required'" type="number" :placeholder="$t('ap20')">
                         </div>
+                        <div class="application-tips">{{$t('ap20')}}</div>
                         <div v-show="errors.has('tel')" class="help is-danger">{{ $t('ap20') }}</div>
                     </div>
                     <!-- <div class="column is-6">
@@ -269,7 +276,8 @@ export default {
             test_type_2:'',
             selectTypeArr1:[],
             selectTypeArr2:[],
-            // beforeTime:new Date(),
+            beforeTime:'',
+            maxTime:'',
             modalShow:0,
             ctxMessage:'',
             selectArr:[],
@@ -282,9 +290,19 @@ export default {
         },
         getTestList(){
             return this.$store.state.TestList
+        },
+        getTestTile(){
+            return this.$store.state.testTile
         }
     },
     async created(){
+
+        let t1 = new Date();
+        let t2 = new Date();
+
+        this.beforeTime = t1.setDate(t1.getDate() - 7)
+        this.maxTime = t2.setDate(t2.getDate() + 2)
+
         const data = await getApplicationInfo('OTRF');
         this.ruleCtx = data.data.sector
         this.selectArr = data.data.test_type;
@@ -294,19 +312,19 @@ export default {
     methods:{
         hideModal(){
             this.modalShow = 0;
-            if(this.isSuccess) {
+            // if(this.isSuccess) {
                 
-                let path;
-                switch(this.isSuccess){
-                    case 1:
-                        path =  `/price_table/${this.dataID}`
-                    break;
-                    case 2:
-                        path = `/table/${this.dataID}`
-                    break;
-                }
-                this.$router.replace(path)
-            };
+            //     let path;
+            //     switch(this.isSuccess){
+            //         case 1:
+            //             path =  `/price_table/${this.dataID}`
+            //         break;
+            //         case 2:
+            //             path = `/table/${this.dataID}`
+            //         break;
+            //     }
+            //     this.$router.replace(path)
+            // };
         },
         selectChange(e){
 
@@ -369,8 +387,9 @@ export default {
                     
                     
 
-                    this.modalShow = 1;
+                    // this.modalShow = 1;
                     if(data.code != '0') {
+                        this.modalShow = 1;
                         this.ctxMessage = data.message;
                         if(data.data) {
                            
@@ -392,15 +411,31 @@ export default {
                     };
 
 
-                    if(data.data.to_pay) {
-                        this.isSuccess = 1;
-                    }else{
-                        this.isSuccess = 2;
-                    };
+                    let path;
 
-                    this.dataID = data.data.id;
+                    if(data.data.to_pay) {
+                        path =  `/price_table/${data.data.id}`
+                    }else{
+                        if(data.data.to_confirm) {
+                            path = `/table/${data.data.id}?isConfirm=1`
+                        }else{
+                            path = `/table/${data.data.id}`
+                        }
+                    }
+                   
+                    this.$router.replace(path)
+
+
+
+                    // if(data.data.to_pay) {
+                    //     this.isSuccess = 1;
+                    // }else{
+                    //     this.isSuccess = 2;
+                    // };
+
+                    // this.dataID = data.data.id;
                     
-                    this.ctxMessage = this.$t('ap16');
+                    // this.ctxMessage = this.$t('ap16');
 
                     
                 }

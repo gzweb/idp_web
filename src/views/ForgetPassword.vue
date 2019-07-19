@@ -29,7 +29,11 @@
             </div>
         </div>
         <Footer />
-        <Modal :ctxMessage="ctxMessage" :show="show" @hideModal="hideModal" />
+        <Modal :ctxMessage="ctxMessage" :show="show" @hideModal="hideModal">
+            <template>
+                {{$t('forget-6')}}
+            </template>
+        </Modal>
     </div>
 </template>
 

@@ -6,7 +6,7 @@
                 <img class="rellax-pic" src="../../public/images/banner_4.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestList['sector']&&getTestList['sector'][4]['name']}}</div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestTile}}</div>
                 <!-- <div class="rellax-text is-size-1-desktop is-size-3-touch">(Reprint TRF) application</div> -->
             </template>
         </RellaxBanner>
@@ -56,7 +56,7 @@
                 <div class="columns" style="margin-bottom:0;">
                     
                     <div class="column">
-                        <date-picker name="test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="test_date" :not-before="beforeTime" :not-after="maxTime" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div v-show="errors.has('test_date')" class="help is-danger">{{ $t('validation-6') }}</div>
                     </div>
                     <div class="column">
@@ -112,174 +112,92 @@
                 </div>
             </div>
             <div class="container form-view">
-                <label class="label form-label">{{$t('ap21')}}</label>
-                <div class="columns is-multiline" v-for="(item,key) in params.institution" :key="key">
-                    <div class="column is-6">
-                        <div class="control">
-                            <input :name="`contact_name-${key}`" v-validate="'required'" v-model="params.institution[key]['contact_name']"  class="input" type="text" :placeholder="$t('ap17')">
-                        </div>
-                        <div v-show="errors.has(`contact_name-${key}`)" class="help is-danger">{{ $t('ap17') }}</div>
-                    </div>
-                    <div class="column is-6">
-                        <div class="control">
-                            <input :name="`institution_name-${key}`" v-validate="'required'" v-model="params.institution[key]['institution_name']" class="input" type="text" :placeholder="$t('ap18')">
-                        </div>
-                        <div v-show="errors.has(`institution_name-${key}`)" class="help is-danger">{{ $t('ap18') }}</div>
-                    </div>
-
-                    <div class="column is-6">
-                        <input v-model="params.institution[key]['file_number']" class="input" type="text" :placeholder="$t('ap23')">
-                    </div>
-
-                    <div class="column is-6">
-                        <div class="control">
-                            <input :name="`address-${key}`" v-validate="'required'" v-model="params.institution[key]['address']" class="input" type="text" :placeholder="$t('ap19')">
-                        </div>
-                        <div v-show="errors.has(`address-${key}`)" class="help is-danger">{{ $t('ap19') }}</div>
-                    </div>
-
-                    <div class="column is-6">
-                        <div class="control">
-                            <input :name="`tel-${key}`" v-validate="'required'" v-model="params.institution[key]['tel']" class="input" type="text" :placeholder="$t('ap20')">
-                        </div>
-                        <div v-show="errors.has(`tel-${key}`)" class="help is-danger">{{ $t('ap20') }}</div>
-                        
-                    </div>
-
-                    <!-- <div class="column is-6" v-if="key == params.institution.length - 1">
-                        <div class="columns">
-                            <div class="column is-5">
-                                <div class="button button-style" @click="addInfo">{{$t('ap22')}}</div>
+                <template v-for="(item,key) in params.institution">
+                    <label class="label form-label">{{$t('ap21')}}{{key+1}}</label>
+                    <div class="columns is-multiline" >
+                        <div class="column is-6">
+                            <div class="control">
+                                <input :name="`contact_name-${key}`" v-validate="'required'" v-model="params.institution[key]['contact_name']"  class="input" type="text" :placeholder="$t('ap17')">
                             </div>
-                            <div class="column">
-                                <div class="button remove-style" @click="removeInfo" v-if="params.institution.length > 1">{{$t('ap36')}}</div>
-                            </div>
+                            <div class="application-tips">{{$t('ap17')}}</div>
+                            <div v-show="errors.has(`contact_name-${key}`)" class="help is-danger">{{ $t('ap17') }}</div>
                         </div>
-                        
-                        
-                    </div> -->
+                        <div class="column is-6">
+                            <div class="control">
+                                <input :name="`institution_name-${key}`" v-validate="'required'" v-model="params.institution[key]['institution_name']" class="input" type="text" :placeholder="$t('ap18')">
+                            </div>
+                            <div class="application-tips">{{$t('ap18')}}</div>
+                            <div v-show="errors.has(`institution_name-${key}`)" class="help is-danger">{{ $t('ap18') }}</div>
+                        </div>
 
-                    <div class="container form-view" style="padding:.75rem;padding-bottom:50px;">
-                        <label class="label form-label" style="margin-top:0px;">{{$t('ap24')}}</label>
-                        <div class="application-tips" style="margin-bottom:10px;">{{ $t('ap44') }}</div>
-                        <div class="columns">
-                            <div class="column is-6">
-                                <div class="field has-addons">
-                                    <div class="control is-expanded">
-                                        <div class="select is-fullwidth">
-                                            <!--  params.courier_service -->
-                                            <select :name="`courier_service-${key}`" v-validate="'required'" v-model="params.institution[key]['courier_service']" v @change="selectChange">
-                                                <option disabled value="">{{ $t('ap24') }}</option>
-                                                <option :value="item.value" v-for="(item,key) in selectArr1" :key="key">
-                                                    {{item.text}}
-                                                </option>
-                                            </select>
+                        <div class="column is-6">
+                            
+                            <input v-model="params.institution[key]['file_number']" class="input" type="text" :placeholder="$t('ap23')">
+                            <div class="application-tips">{{$t('ap23')}}</div>
+                        </div>
+
+                        <div class="column is-6">
+                            <div class="control">
+                                <input :name="`address-${key}`" v-validate="'required|alpha_spaces'" v-model="params.institution[key]['address']" class="input" type="text" :placeholder="$t('ap19')">
+                            </div>
+                            <div class="application-tips">{{$t('ap19')}}</div>
+                            <div v-show="errors.has(`address-${key}`)" class="help is-danger">{{ $t('ap19') }}</div>
+                        </div>
+
+                        <div class="column is-6">
+                            <div class="control">
+                                <input :name="`tel-${key}`" v-validate="'required|alpha_num'" v-model="params.institution[key]['tel']" class="input" type="text" :placeholder="$t('ap20')">
+                            </div>
+                            <div class="application-tips">{{$t('ap20')}}</div>
+                            <div v-show="errors.has(`tel-${key}`)" class="help is-danger">{{ $t('ap20') }}</div>
+                            
+                        </div>
+
+                    
+
+                        <div class="container form-view" style="padding:.75rem;padding-bottom:50px;">
+                            <label class="label form-label" style="margin-top:0px;">{{$t('ap24')}}</label>
+                            <div class="application-tips" style="margin-bottom:10px;">{{ $t('ap44') }}</div>
+                            <div class="columns">
+                                <div class="column is-6">
+                                    <div class="field has-addons">
+                                        <div class="control is-expanded">
+                                            <div class="select is-fullwidth">
+                                                <!--  params.courier_service -->
+                                                <select :name="`courier_service-${key}`" v-validate="'required'" v-model="params.institution[key]['courier_service']" v @change="selectChange">
+                                                    <option disabled value="">{{ $t('ap24') }}</option>
+                                                    <option :value="item.value" v-for="(item,key) in selectArr1" :key="key">
+                                                        {{item.text}}
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="application-tips" v-show="params.institution[key]['selectTips']">{{params.institution[key]['selectTips']}}</div>
+                                    <div v-show="errors.has(`courier_service-${key}`)" class="help is-danger">{{ $t('ap24') }}</div>
                                 </div>
-                                <div class="application-tips" v-show="params.institution[key]['selectTips']">{{params.institution[key]['selectTips']}}</div>
-                                <div v-show="errors.has(`courier_service-${key}`)" class="help is-danger">{{ $t('ap24') }}</div>
-                            </div>
-                            <div class="column is-6" v-if="key == params.institution.length - 1">
-                                <div class="columns">
-                                    <div class="column is-5">
-                                        <div class="button button-style" @click="addInfo">{{$t('ap22')}}</div>
+                                <div class="column is-6" v-if="key == params.institution.length - 1">
+                                    <div class="columns">
+                                        <div class="column is-5">
+                                            <div class="button button-style" @click="addInfo">{{$t('ap22')}}</div>
+                                        </div>
+                                        <div class="column">
+                                            <div class="button remove-style" @click="removeInfo" v-if="params.institution.length > 1">{{$t('ap36')}}</div>
+                                        </div>
                                     </div>
-                                    <div class="column">
-                                        <div class="button remove-style" @click="removeInfo" v-if="params.institution.length > 1">{{$t('ap36')}}</div>
-                                    </div>
+                                    
+                                    
                                 </div>
-                                
-                                
                             </div>
                         </div>
+                        
                     </div>
-                    
-                </div>
+                </template>
+                
                 
             </div>
 
-            <!-- <div class="container form-view">
-                <label class="label form-label">{{$t('ap24')}}</label>
-                <div class="application-tips" style="margin-bottom:10px;">{{ $t('ap44') }}</div>
-                <div class="columns">
-                    <div class="column is-6">
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <div class="select is-fullwidth">
-                                    <select name="courier_service" v-validate="'required'" v-model="params.courier_service" @change="selectChange">
-                                        <option disabled value="">{{ $t('ap24') }}</option>
-                                        <option :value="item.value" v-for="(item,key) in selectArr1" :key="key">
-                                            {{item.text}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="application-tips" v-show="selectTips">{{selectTips}}</div>
-                        <div v-show="errors.has('courier_service')" class="help is-danger">{{ $t('ap24') }}</div>
-                        
-                    </div>
-                    
-                </div>
-            </div> -->
-
-            <!-- <div class="container form-view" v-if="params.medium == 'PAPER'">
-                <label class="label form-label">{{ $t('ap26') }}</label>
-                <div class="columns">
-                    <div class="column is-6">
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <div class="select is-fullwidth">
-                                    <select name="courier_service" v-validate="'required'" v-model="params.courier_service" @change="selectChange">
-                                        <option disabled value="">{{ $t('ap27') }}</option>
-                                        <option :value="item.value" v-for="(item,key) in selectArr2" :key="key">
-                                            {{item.text}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-show="errors.has('courier_service')" class="help is-danger">{{ $t('ap27') }}</div>
-                    </div>
-                </div>
-
-
-
-
-                <div class="columns">
-                    <div class="column is-6">
-                        <input class="input" type="text" :placeholder=" $t('ap28')">
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        <input class="input" type="text" :placeholder="$t('ap29')">
-                    </div>
-                </div>
-                <div class="tips">{{$t('ap30')}}</div>
-                
-                <div class="columns">
-                    <div class="column is-2">
-                        <input class="input" type="text" placeholder="+86">
-                    </div>
-                    <div class="column is-4">
-                        <input class="input" type="text" placeholder="Contact phone number">
-                    </div>
-                    <div class="column is-6">
-                        <input class="input" type="text" placeholder="Zip code">
-                    </div>
-                </div>
-
-                <div class="additional-text">List the acceptance of electronic copy</div>
-                <div class="download-link-view">
-                    <a class="download-link" href="">1.Click on the file name to download</a>
-                </div>
-                
-                
-                
-                
-            </div> -->
+           
 
             
 
@@ -357,7 +275,8 @@ export default {
 
             
 
-            // beforeTime:new Date(),
+            beforeTime:'',
+            maxTime:'',
             modalShow:0,
             ctxMessage:'',
             selectTips:0,
@@ -380,9 +299,19 @@ export default {
         },
         getTestList(){
             return this.$store.state.TestList
+        },
+        getTestTile(){
+            return this.$store.state.testTile
         }
     },
     async created(){
+
+        let t1 = new Date();
+        let t2 = new Date();
+
+        this.beforeTime = t1.setDate(t1.getDate() - 698)
+        this.maxTime = t2.setDate(t2.getDate() + 2)
+
         const data = await getApplicationInfo('RTRF');
         this.ruleCtx = data.data.sector
         this.selectArr = data.data.test_type;
@@ -463,19 +392,19 @@ export default {
         },
         hideModal(){
             this.modalShow = 0;
-            if(this.isSuccess) {
+            // if(this.isSuccess) {
                 
-                let path;
-                switch(this.isSuccess){
-                    case 1:
-                        path =  `/price_table/${this.dataID}`
-                    break;
-                    case 2:
-                        path = `/table/${this.dataID}`
-                    break;
-                }
-                this.$router.replace(path)
-            };
+            //     let path;
+            //     switch(this.isSuccess){
+            //         case 1:
+            //             path =  `/price_table/${this.dataID}`
+            //         break;
+            //         case 2:
+            //             path = `/table/${this.dataID}`
+            //         break;
+            //     }
+            //     this.$router.replace(path)
+            // };
         },
         submitForm(){
             // console.log(this.params)
@@ -497,8 +426,9 @@ export default {
         
                     
 
-                    this.modalShow = 1;
+                    
                     if(data.code != '0') {
+                        this.modalShow = 1;
                         this.ctxMessage = data.message;
                         if(data.data) {
                             data.data.fields.forEach((v,k)=>{
@@ -516,15 +446,31 @@ export default {
                     };
 
 
-                    if(data.data.to_pay) {
-                        this.isSuccess = 1;
-                    }else{
-                        this.isSuccess = 2;
-                    };
+                    let path;
 
-                    this.dataID = data.data.id;
+                    if(data.data.to_pay) {
+                        path =  `/price_table/${data.data.id}`
+                    }else{
+                        if(data.data.to_confirm) {
+                            path = `/table/${data.data.id}?isConfirm=1`
+                        }else{
+                            path = `/table/${data.data.id}`
+                        }
+                    }
+                   
+                    this.$router.replace(path)
+
+
+
+                    // if(data.data.to_pay) {
+                    //     this.isSuccess = 1;
+                    // }else{
+                    //     this.isSuccess = 2;
+                    // };
+
+                    // this.dataID = data.data.id;
                     
-                    this.ctxMessage = this.$t('ap16');
+                    // this.ctxMessage = this.$t('ap16');
 
                     
                 }

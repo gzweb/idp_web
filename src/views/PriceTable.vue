@@ -21,8 +21,16 @@
                     <div class="columns is-marginless is-gapless is-mobile table-view-item table-view-item-first">
                         <div class="column">{{menuList[0]['text']}}：{{ menuList[0]['value'] }}</div>
                         <div class="column has-text-right">{{menuList[1]['text']}}：
-
-                            <span class="table-color">{{h}}:{{m}}:{{s}}</span>
+                            <template v-if="getLanguage == 'cn'">
+                                <span class="table-color">{{h}}小时:{{m}}分钟</span>
+                            </template>
+                            <template v-else-if="getLanguage == 'zh'">
+                                <span class="table-color">{{h}}小時:{{m}}分鐘</span>
+                            </template>
+                            <template v-else>
+                                <span class="table-color">{{h}}h:{{m}}m</span>
+                            </template>
+                            
                         </div>
                     </div>
                     
@@ -58,9 +66,9 @@
                 </div>
 
                 <div class="columns is-marginless is-gapless price-item">
-                    <div class="column has-text-right">
+                    <div class="column has-text-right" style="margin-bottom:30px">
                         <a :href="link" class="button button-style price-button">{{$t('table5')}}</a>
-                        <div class="pay-tips">{{$t('table4')}}</div>
+                        <!-- <div class="pay-tips">{{$t('table4')}}</div> -->
                     </div>
                 </div>
             </div>
@@ -104,10 +112,13 @@ export default {
             moneyInfo:''
         }
     },
+    computed:{
+        getLanguage(){
+            return this.$store.state.language
+        }
+    },
     async created(){
 
-       
-        
         const data = await getPayInfo(this.$route.params.id);
         
 

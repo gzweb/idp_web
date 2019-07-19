@@ -6,7 +6,7 @@
                 <img class="rellax-pic" src="../../public/images/banner_2.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestList['sector']&&getTestList['sector'][3]['name']}}</div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestTile}}</div>
                 <!-- <div class="rellax-text is-size-1-desktop is-size-3-touch">application</div> -->
             </template>
         </RellaxBanner>
@@ -101,14 +101,15 @@
                 <div class="columns">
                     
                     <div class="column is-6">
-                        <date-picker name="test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" :not-before="beforeTime" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" :not-before="beforeTime" :not-after="maxTime" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <div class="application-tips">{{$t('ap52')}}</div>
                         <div v-show="errors.has('test_date')" class="help is-danger">{{ $t('validation-6') }}</div>
                     </div>
                 </div>
             </div>
           
 
-
+            
 
 
             <div class="container form-view">
@@ -120,15 +121,18 @@
                                 <div class="select is-fullwidth">
                                     <select name="params.refund_type" v-validate="'required'" v-model="params.refund_type" @change="selectChange">
                                         <option disabled value="">{{$t('ap1')}}</option>
-                                        <option :value="item.value" v-for="(item,key) in selectArr1" :key="key">
+                                        
+                                        <option v-show="item.value != 'CASH' || isCash" :value="item.value" v-for="(item,key) in selectArr1" :key="key">
                                             {{item.text}}
                                         </option>
                                         
                                     </select>
+                                    
                                 </div>
                             </div>
                             
                         </div>
+                        
                         <div v-show="errors.has('params.refund_type')" class="help is-danger">{{ $t('ap1') }}</div>
                     </div>
                 </div>
@@ -171,8 +175,16 @@
                     </div>
                 </div>
                 
+
+                <div style="margin-bottom:20px;">
+                    <label class="bui-checkbox-label  bui-checkbox-anim">
+                        <input @change="selectChange" name="cash" v-model="isCash" type="checkbox" /><i class="bui-checkbox" style="margin-right:10px;"></i>{{$t('ap53')}}</a> 
+                    </label>
+                </div>
                 
             </div>
+
+            
 
             <div class="container form-view">
                 <label class="label form-label">{{$t('ap34')}}</label>
@@ -293,6 +305,7 @@ export default {
                 }
             },
 
+            isCash:0,
 
             test_type_1:'',
             test_type_2:'',
@@ -320,10 +333,21 @@ export default {
         },
         getTestList(){
             return this.$store.state.TestList
+        },
+        getTestTile(){
+            return this.$store.state.testTile
         }
     },
     async created(){
         // console.log(Language)
+
+        let t1 = new Date();
+        let t2 = new Date();
+
+        this.beforeTime = t1.setDate(t1.getDate() - 7)
+        this.maxTime = t2.setDate(t2.getDate() + 365)
+
+
         const data = await getApplicationInfo('TFR');
         this.ruleCtx = data.data.sector
         this.selectArr = data.data.test_type;
@@ -375,6 +399,9 @@ export default {
                 case 'params.refund_type':
                     this.params.refund_type = e.target.value
                 break;
+                case 'cash':
+                    this.params.refund_type = (this.isCash?this.selectArr1[1]['value']:this.selectArr1[0]['value'])
+                    break;
             }
         },
         async imgChange(e){
@@ -414,19 +441,19 @@ export default {
         },
         hideModal(){
             this.modalShow = 0;
-            if(this.isSuccess) {
+            // if(this.isSuccess) {
                 
-                let path;
-                switch(this.isSuccess){
-                    case 1:
-                        path =  `/price_table/${this.dataID}`
-                    break;
-                    case 2:
-                        path = `/table/${this.dataID}`
-                    break;
-                }
-                this.$router.replace(path)
-            };
+            //     let path;
+            //     switch(this.isSuccess){
+            //         case 1:
+            //             path =  `/price_table/${this.dataID}`
+            //         break;
+            //         case 2:
+            //             path = `/table/${this.dataID}`
+            //         break;
+            //     }
+            //     this.$router.replace(path)
+            // };
         },
         submitForm(){
 
@@ -452,22 +479,38 @@ export default {
                    
                     
                     
-                    this.modalShow = 1;
+                    
                     if(data.code != '0') {
+                        this.modalShow = 1;
                         this.ctxMessage = data.message;
                         return;
                     };
 
+                    let path;
 
                     if(data.data.to_pay) {
-                        this.isSuccess = 1;
+                        path =  `/price_table/${data.data.id}`
                     }else{
-                        this.isSuccess = 2;
-                    };
+                        if(data.data.to_confirm) {
+                            path = `/table/${data.data.id}?isConfirm=1`
+                        }else{
+                            path = `/table/${data.data.id}`
+                        }
+                    }
+                   
+                    this.$router.replace(path)
 
-                    this.dataID = data.data.id;
+
+
+                    // if(data.data.to_pay) {
+                    //     this.isSuccess = 1;
+                    // }else{
+                    //     this.isSuccess = 2;
+                    // };
+
+                    // this.dataID = data.data.id;
                     
-                    this.ctxMessage = this.$t('ap16');
+                    // this.ctxMessage = this.$t('ap16');
 
                     
                 }

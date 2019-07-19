@@ -6,7 +6,7 @@
                 <img class="rellax-pic" src="../../public/images/score_1.png" alt="">
             </template>
             <template v-slot:rellaxtext>
-                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestList['sector']&&getTestList['sector'][1]['name']}} </div>
+                <div class="rellax-text is-size-1-desktop is-size-3-touch">{{getTestTile}} </div>
                 <!-- <div class="rellax-text is-size-1-desktop is-size-3-touch">application</div> -->
             </template>
         </RellaxBanner>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="column" style="line-height:normal;">
                         <!-- 限制时间 not-after="2019-05-30 12:00:00" -->
-                        <date-picker name="params.test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="params.test_date" v-validate="'required'" :not-before="beforeTime" :not-after="maxTime" :editable="false" :placeholder="$t('validation-6')" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div class="application-tips">{{$t('ap38')}}</div>
                         <div v-show="errors.has('params.test_date')" class="help is-danger">{{ $t('validation-6') }}</div>
                     </div>
@@ -129,11 +129,16 @@
                     </div>
                 </div>
 
+                <div class="application-tips">{{$t('ap52')}}</div>
                 <div v-show="errors.has('check')" class="help is-danger">{{ $t('ap39') }}</div>
 
                 
 
             </div>
+
+           
+
+            
             <div class="container form-view">
                 <label class="label form-label">{{$t('ap5')}}</label>
                 <div class="columns">
@@ -143,7 +148,7 @@
                                 <div class="select is-fullwidth">
                                     <select name="params.refund_type" v-validate="'required'" v-model="params.refund_type" @change="selectChange">
                                         <option disabled value="">{{$t('ap1')}}</option>
-                                        <option :value="item.value" v-for="(item,key) in selectArr1" :key="key">
+                                        <option v-show="item.value != 'CASH' || isCash" :value="item.value" v-for="(item,key) in selectArr1" :key="key">
                                             {{item.text}}
                                         </option>
                                         
@@ -194,16 +199,25 @@
                     </div>
                 </div>
                 
-                <template v-for="item in ruleCtx.files">
+                <!-- <template v-for="item in ruleCtx.files">
                     <div class="additional-text">{{item.title}}</div>
                     <div class="download-link-view">
                         <a :href="items.link" v-for="(items,key) in item.files" :key="key" class="download-link">{{key+1}}. &nbsp;&nbsp;{{items.name}}</a>
                     </div>
-                </template>
+                </template> -->
+
+                <div style="margin-bottom:120px;">
+                    <label class="bui-checkbox-label  bui-checkbox-anim">
+                        <input @change="selectChange" name="cash" v-model="isCash" type="checkbox" /><i class="bui-checkbox" style="margin-right:10px;"></i>{{$t('ap53')}}</a> 
+                    </label>
+                </div>
+                
 
                 <label class="bui-checkbox-label  bui-checkbox-anim">
                     <input v-validate="'required'" type="checkbox" name="terms"/><i class="bui-checkbox"></i><a class="rule-link" href="#rule">{{$t('ap6')}}</a> 
                 </label>
+                
+
                 <div class="control">
                     <div v-show="errors.has('terms')" class="help is-danger">{{ $t('ap4') }}</div>
                 </div>
@@ -221,7 +235,7 @@
                 <div class="application-title" v-html="ruleCtx.terms.title"></div>
                 <div class="application-ctx" v-html="ruleCtx.terms.content"></div>
             </div>
-
+            
         </div>
         
         <Modal @hideModal="hideModal" :ctxMessage="ctxMessage" :show="modalShow" />
@@ -264,7 +278,8 @@ export default {
             test_type_2:'',
             selectTypeArr1:[],
             selectTypeArr2:[],
-            // beforeTime:new Date(),
+            beforeTime:'',
+            maxTime:'',
 
             modalShow:0,
             ctxMessage:'',
@@ -278,7 +293,8 @@ export default {
                 refund_type:'',
                 test_type:'',
                 components:[]
-            }
+            },
+            isCash:0
         }
     },
     computed:{
@@ -287,10 +303,19 @@ export default {
         },
         getTestList(){
             return this.$store.state.TestList
+        },
+        getTestTile(){
+            return this.$store.state.testTile
         }
     },
     async created(){
         
+
+        let t1 = new Date();
+        let t2 = new Date();
+
+        this.beforeTime = t1.setDate(t1.getDate() - 41)
+        this.maxTime = t2.setDate(t2.getDate() + 5)
 
 		const data = await getApplicationInfo('EOR');
 		
@@ -338,6 +363,8 @@ export default {
             };
 
 
+            // console.log(e.target.name)
+
             switch(e.target.name) {
                 // case 'params.test_type':
                 //     this.params.test_type = e.target.value
@@ -345,6 +372,9 @@ export default {
                 case 'params.refund_type':
                     this.params.refund_type = e.target.value
                 break;
+                case 'cash':
+                    this.params.refund_type = (this.isCash?this.selectArr1[1]['value']:this.selectArr1[0]['value'])
+                    break;
             }
         },
         checkTap(key,ev){
@@ -358,19 +388,19 @@ export default {
             this.modalShow = 0;
 
         
-            if(this.isSuccess) {
+            // if(this.isSuccess) {
                 
-                let path;
-                switch(this.isSuccess){
-                    case 1:
-                        path =  `/price_table/${this.dataID}`
-                    break;
-                    case 2:
-                        path = `/table/${this.dataID}`
-                    break;
-                }
-                this.$router.replace(path)
-            };
+            //     let path;
+            //     switch(this.isSuccess){
+            //         case 1:
+            //             path =  `/price_table/${this.dataID}`
+            //         break;
+            //         case 2:
+            //             path = `/table/${this.dataID}`
+            //         break;
+            //     }
+            //     this.$router.replace(path)
+            // };
 
         },
         submitForm(){
@@ -395,8 +425,9 @@ export default {
                     
                     
 
-                    this.modalShow = 1;
+                    
                     if(data.code != '0') {
+                        this.modalShow = 1;
                         this.ctxMessage = data.message;
 
                         if(data.data) {
@@ -420,15 +451,34 @@ export default {
                     };
 
 
-                    if(data.data.to_pay) {
-                        this.isSuccess = 1;
-                    }else{
-                        this.isSuccess = 2;
-                    };
 
-                    this.dataID = data.data.id;
+                    let path;
+
+                    if(data.data.to_pay) {
+                        path =  `/price_table/${data.data.id}`
+                    }else{
+                        if(data.data.to_confirm) {
+                            path = `/table/${data.data.id}?isConfirm=1`
+                        }else{
+                            path = `/table/${data.data.id}`
+                        }
+                    }
+                   
+                    this.$router.replace(path)
+
+
+
+
+
+                    // if(data.data.to_pay) {
+                    //     this.isSuccess = 1;
+                    // }else{
+                    //     this.isSuccess = 2;
+                    // };
+
+                    // this.dataID = data.data.id;
                     
-                    this.ctxMessage = this.$t('ap16');
+                    // this.ctxMessage = this.$t('ap16');
 
                     
                 }

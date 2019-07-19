@@ -45,7 +45,7 @@
                     <div class="column">{{$t('home8')}}</div>
                 </div>
                 <div class="columns is-marginless is-mobile is-paddingless has-text-centered is-gapless" v-for="(item,key) in list" :key="key">
-                    <div class="column">{{item.id}}</div>
+                    <div class="column">{{item.number}}</div>
                     <div class="column status-style-1" :class="{
                         'status-style-1':item.state == 'Awaiting Payment' || item.state == 'Pending' || item.state == 'Pending for delivering',
                         'status-style-2':item.state == 'Approved' || item.state == 'Completed' || item.state == 'Delivered',

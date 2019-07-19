@@ -45,8 +45,12 @@ export default new Vuex.Store({
 		includeList: [],
 		TestList:[{}],
 		appTop:0,
+		testTile:''
 	},
 	mutations: {
+		setTestTile(state ,stutas){  //设置高度
+			state.testTile = stutas;
+		},
 		setAppTop(state ,stutas){  //设置高度
 			state.appTop = stutas;
 		},
