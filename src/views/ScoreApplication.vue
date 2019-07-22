@@ -206,7 +206,7 @@
                     </div>
                 </template> -->
 
-                <div style="margin-bottom:120px;">
+                <div style="margin-bottom:10px;">
                     <label class="bui-checkbox-label  bui-checkbox-anim">
                         <input @change="selectChange" name="cash" v-model="isCash" type="checkbox" /><i class="bui-checkbox" style="margin-right:10px;"></i>{{$t('ap53')}}</a> 
                     </label>
