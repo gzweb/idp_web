@@ -51,7 +51,7 @@
                 
                 
                 <div class="columns columns-style-1">
-                    <div class="column is-6 is-offset-3">
+                    <div class="column">
                         <div class="columns">
                             <div class="column">
                                 <div @click="backTap" class="button button-style table-button">{{$t('table2')}}</div>
@@ -61,8 +61,13 @@
                             </div>
 
                             <div class="column" v-if="this.isConfirm">
+                                <div class="button button-style table-button" @click="cancelOrder">{{$t('table7')}}</div>
+                            </div>
+
+                            <div class="column" v-if="this.isConfirm">
                                 <div class="button button-style table-button" @click="postOrder">{{$t('table6')}}</div>
                             </div>
+
                            
                         </div>
                     </div>
@@ -107,14 +112,15 @@ export default {
     watch:{
         '$route':async function(){
             
-            if(this.isConfirm){
-                const data = await getApplicationCtx(this.$route.params.id,{
-                    confirm:this.isConfirm?1:0
-                })
+            
+            const data = await getApplicationCtx(this.$route.params.id)
+            
+
+            console.log(data)
                 
-                this.menuList = data.data[0]['value'];
-                this.list = data.data.slice(1);
-            }
+                
+            this.menuList = data.data[0]['value'];
+            this.list = data.data.slice(1);
 
 
             this.isConfirm = 0;
@@ -132,6 +138,11 @@ export default {
         
     },
     methods:{
+        cancelOrder(){
+            
+
+            this.$router.replace('/')
+        },
         async postOrder(){
         
             

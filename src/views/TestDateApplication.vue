@@ -84,7 +84,7 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap10')" value-type="format" width="100%" input-class="input" :not-before="beforeTime" :not-after="maxTime" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
+                        <date-picker name="testDate" v-validate="'required'" :editable="false" :placeholder="$t('ap54')" value-type="format" width="100%" input-class="input" :not-before="beforeTime" :not-after="maxTime" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
                         <div class="application-tips">{{$t('ap54')}}</div>        
                         <div v-show="errors.has('testDate')" class="help is-danger">{{ $t('ap10') }}</div>
                     </div>
