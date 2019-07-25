@@ -105,8 +105,20 @@ export default {
         }
     },
     watch:{
-        '$route':function(){
+        '$route':async function(){
+            
+            if(this.isConfirm){
+                const data = await getApplicationCtx(this.$route.params.id,{
+                    confirm:this.isConfirm?1:0
+                })
+                
+                this.menuList = data.data[0]['value'];
+                this.list = data.data.slice(1);
+            }
+
+
             this.isConfirm = 0;
+            
         }
     },
     async created(){
@@ -114,11 +126,6 @@ export default {
         const data = await getApplicationCtx(this.$route.params.id,{
             confirm:this.isConfirm?1:0
         })
-        // Toast.clear();
-        
-
-        // console.log(this.$route.path);
-        // console.log(data);
         
         this.menuList = data.data[0]['value'];
         this.list = data.data.slice(1);

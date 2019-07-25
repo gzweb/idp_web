@@ -55,7 +55,8 @@ export default {
         "ap53":'本人确认没有持有于香港本地银行的私人储蓄户口及需以现金退款。',
         "ap54":'原定的考试日期',
         "ap55":'新的考试日期',
-        "ap56":'请于<a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a>查看本中心最新的考试日期',
+        "ap56":'请于 <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> 查看本中心最新的考试日期',
+
     },
     "en":{
         "ap1":"Choose the Type of Refund",
@@ -72,7 +73,7 @@ export default {
         "ap12":"Select a Reason",
         // "ap13":"",
         "ap14":"Select the file",
-        "ap15":"Upload success",
+        "ap15":"Upload successful",
         "ap16":"Submitted successfully",
         "ap17":"Name of Person/Department",
         "ap18":"Name of College/University/Institution",
@@ -113,7 +114,7 @@ export default {
         "ap53":'I declare that I do not have a local bank account in Hong Kong and request the refund in cash.',
         "ap54":'Scheduled Test Date',
         "ap55":'Preferred New Test Date',
-        "ap56":'Please go to <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a>for the latest test session availability of our Test Centre',
+        "ap56":'Please go to <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> for the latest test session availability of our Test Centre',
     },
     "zh":{
         "ap1":"選擇退款類型",
@@ -171,6 +172,7 @@ export default {
         "ap53":'本人確認沒有持有於香港本地銀行的私人儲蓄戶口及需以現金退款。',
         "ap54":'原定的考試日期',
         "ap55":'新的考試日期',
-        "ap56":'請於<a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a>查看本中心最新的考試日期',
+        "ap56":'請於 <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> 查看本中心最新的考試日期',
+        
     }
 }

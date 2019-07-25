@@ -25,14 +25,14 @@
                    
                     <div class="column">
                         <div class="control">
-                            <input name="last_name" v-model="params.last_name" v-validate="'required|alpha_spaces'" type="text" class="input" :placeholder="$t('validation-1')">
+                            <input name="last_name" v-model="params.last_name" v-validate="{ required: true, regex: /^[A-Za-z.'-\s]+$/}" type="text" class="input" :placeholder="$t('validation-1')">
                         </div>
                         <div class="application-tips">{{$t('s11')}}</div>
                         <div v-show="errors.has('last_name')" class="help is-danger">{{ $t('validation-1') }}</div>
                     </div>
                      <div class="column">
                         <div class="control">
-                            <input name="first_name" v-validate="'required|alpha_spaces'" v-model="params.first_name" class="input" type="text" :placeholder="$t('validation-2')">
+                            <input name="first_name" v-validate="{ required: true, regex: /^[A-Za-z.'-\s]+$/}" v-model="params.first_name" class="input" type="text" :placeholder="$t('validation-2')">
                         </div>           
                         <div class="application-tips">{{$t('s18')}}</div>            
                         <div v-show="errors.has('first_name')" class="help is-danger">{{ $t('validation-2') }}</div>
@@ -47,50 +47,36 @@
                         <div v-show="errors.has('nameNumber')" class="help is-danger">{{ $t('validation-4') }}</div>
                     </div>
                     <div class="column">
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-
-                                <div class="columns">
-                                    <div class="column is-4">
-                                        <div class="select is-fullwidth">
-											<select name="params.test_type_1" v-validate="'required'" v-model="test_type_1" @change="selectChange">
-												<option disabled value="">{{$t('validation-7')}}</option>
-												<option :value="key" v-for="(item,key) in selectArr" :key="key">
-													{{key}}
-												</option>
-											</select>
-										</div>
-                                    </div>
-                                    <div class="column is-4">
-										<div class="select is-fullwidth">
-											<select name="params.test_type_2" v-validate="'required'" v-model="test_type_2" @change="selectChange">
-												<option disabled value="">{{$t('validation-8')}}</option>
-												<option :value="key" v-for="(item,key) in selectTypeArr1" :key="key">
-													{{key}}
-												</option>
-											</select>
-										</div>
-									</div>
-                                    <div class="column is-4">
-										<div class="select is-fullwidth">
-											<select name="params.test_type" v-validate="'required'" v-model="params.test_type" @change="selectChange">
-												<option disabled value="">{{$t('validation-9')}}</option>
-												<option :value="item" v-for="(item,key) in selectTypeArr2" :key="key">
-													{{key}}
-												</option>
-											</select>
-										</div>
-									</div>
-                                </div>
-
-                                <!-- <div class="select is-fullwidth">
-                                    <select name="testType" v-validate="'required'" v-model="params.test_type" @change="selectChange">
+                        <div class="columns">
+                            <div class="column is-4">
+                                <div class="select is-fullwidth">
+                                    <select name="params.test_type_1" v-validate="'required'" v-model="test_type_1" @change="selectChange">
                                         <option disabled value="">{{$t('validation-7')}}</option>
-                                        <option :value="item.value" v-for="(item,key) in selectArr" :key="key">
-                                            {{item.text}}
+                                        <option :value="key" v-for="(item,key) in selectArr" :key="key">
+                                            {{key}}
                                         </option>
                                     </select>
-                                </div> -->
+                                </div>
+                            </div>
+                            <div class="column is-4">
+                                <div class="select is-fullwidth">
+                                    <select name="params.test_type_2" v-validate="'required'" v-model="test_type_2" @change="selectChange">
+                                        <option disabled value="">{{$t('validation-8')}}</option>
+                                        <option :value="key" v-for="(item,key) in selectTypeArr1" :key="key">
+                                            {{key}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="column is-4">
+                                <div class="select is-fullwidth">
+                                    <select name="params.test_type" v-validate="'required'" v-model="params.test_type" @change="selectChange">
+                                        <option disabled value="">{{$t('validation-9')}}</option>
+                                        <option :value="item" v-for="(item,key) in selectTypeArr2" :key="key">
+                                            {{key}}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div v-show="errors.has('params.test_type')" class="help is-danger">{{ $t('validation-7') }}</div>
@@ -282,11 +268,11 @@ export default {
         let t3 = new Date();
         let t4 = new Date();
 
-        this.beforeTime = t1.setDate(t1.getDate() - 7)
-        this.maxTime = t2.setDate(t2.getDate() + 365)
+        // this.beforeTime = t1.setDate(t1.getDate() - 7)
+        // this.maxTime = t2.setDate(t2.getDate() + 365)
 
-        this.beforeTime1 = t3.setDate(t3.getDate() +2)
-        this.maxTime1 = t4.setDate(t4.getDate() + 365)
+        // this.beforeTime1 = t3.setDate(t3.getDate() +2)
+        // this.maxTime1 = t4.setDate(t4.getDate() + 365)
 
 
         const data = await getApplicationInfo('TDT');
@@ -296,7 +282,16 @@ export default {
 
         this.ruleCtx = data.data.sector
 
-        // console.log(this.selectArr1)
+
+
+        this.beforeTime = t1.setDate(t1.getDate() - parseInt(data.data.sector.test_date_range[0]))
+        this.maxTime = t2.setDate(t2.getDate() - parseInt(data.data.sector.test_date_range[1]))
+
+
+        this.beforeTime1 = t3.setDate(t3.getDate() - parseInt(data.data.sector.new_test_date_range[0]))
+        this.maxTime1 = t4.setDate(t4.getDate() - parseInt(data.data.sector.new_test_date_range[1]))
+
+     
     },
     methods:{
         async imgChange(e){

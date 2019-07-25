@@ -19,6 +19,7 @@ export default {
         s16:'我们利用Cookies令你浏览网站时更感简便。<a class="cookie-link" href="https://www.idp.com/hongkong/cookies/" target="_blank">了解更多</a> 有关cookies的信息。',
         s17:'点击验证码图片刷新验证码',
         s18:'您必须输入您在注册证件中显示的名字',
+        s19:'确定',
 
         'validation-1':'请填写英文姓氏',
         'validation-2':'请填写英文名字',
@@ -56,7 +57,7 @@ export default {
         s16:'我們利用Cookies令你瀏覽網站時更感簡便。<a class="cookie-link" href="https://www.idp.com/hongkong/cookies/" target="_blank">了解更多</a> 有關cookies的資訊。',
         s17:'點擊驗證碼圖片刷新驗證碼',
         s18:'您必須輸入您在註冊證件中顯示的名字',
-
+        s19:'確定',
 
         'validation-1':'請填寫英文姓氏',
         'validation-2':'請填寫英文名字',
@@ -94,6 +95,7 @@ export default {
         s16:'We use cookies to enhance your experience. <a class="cookie-link" href="https://www.idp.com/hongkong/cookies/" target="_blank">Find out more</a>  about cookies.',
         s17:'Click verification code image to refresh verification code',
         s18:'You must enter your given name as it appears in your registered ID document',
+        s19:'Confirm',
 
         'validation-1':'Family Name',
         'validation-2':'Given Name',
