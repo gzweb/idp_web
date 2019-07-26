@@ -185,12 +185,12 @@
                     </div>
                 </div>
                 
-                <!-- <template v-for="item in ruleCtx.files">
+                <template v-for="item in ruleCtx.files">
                     <div class="additional-text">{{item.title}}</div>
                     <div class="download-link-view">
                         <a :href="items.link" v-for="(items,key) in item.files" :key="key" class="download-link">{{key+1}}. &nbsp;&nbsp;{{items.name}}</a>
                     </div>
-                </template> -->
+                </template>
 
                 <div style="margin-bottom:10px;">
                     <label class="bui-checkbox-label  bui-checkbox-anim">

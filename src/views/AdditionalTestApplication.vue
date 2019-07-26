@@ -101,7 +101,7 @@
             </div>
             <div class="container form-view">
                 <template v-for="(item,key) in params.institution">
-                    <label class="label form-label">{{$t('ap21')}}{{key+1}}</label>
+                    <label class="label form-label">{{$t('ap21')}} {{key+1}}</label>
                     <div class="columns is-multiline" >
                         <div class="column is-6">
                             <div class="control">
