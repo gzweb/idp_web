@@ -23,10 +23,10 @@ if(!locale) {
 
 switch(locale) {
 	case 'en':
-		document.title = 'IELTS IDP'
+		document.title = 'IDP IELTS'
 	break;
 	default:
-		document.title = '雅思IDP'
+		document.title = 'IDP 雅思'
 	break;
 }
 
