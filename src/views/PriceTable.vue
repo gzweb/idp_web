@@ -66,11 +66,22 @@
                 </div>
 
                 <div class="columns is-marginless is-gapless price-item">
-                    <div class="column has-text-right" style="margin-bottom:30px">
+                    <div class="column has-text-right">
                         <a :href="link" class="button button-style price-button">{{$t('table5')}}</a>
+                        
                         <!-- <div class="pay-tips">{{$t('table4')}}</div> -->
                     </div>
                 </div>
+                <div class="columns is-marginless is-gapless price-item">
+                    <div class="column has-text-right" style="margin-bottom:30px">
+                        <div class="button button-style price-button" @click="cancelOrder">{{$t('table7')}}</div>
+                        
+                        <!-- <div class="pay-tips">{{$t('table4')}}</div> -->
+                    </div>
+                </div>
+
+
+                
             </div>
         </div>
         
@@ -85,7 +96,8 @@
 import '../css/table.css'
 import RellaxBanner from '@/components/RellaxBanner'
 import {formatSeconds} from '../utils/utils'
-import {getPayInfo} from '@/api/home'
+import {getPayInfo,cancelOrder} from '@/api/home'
+
 import translator from '../language/lib/table'
 
 let timer;
@@ -144,7 +156,13 @@ export default {
         clearInterval(timer);
     },
     methods:{
-       
+       async cancelOrder(){
+            const data = await cancelOrder(this.$route.params.id,{
+                id:this.$route.params.id
+            })
+
+           this.$router.replace('/')
+       }
         
     }
 }

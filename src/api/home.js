@@ -20,3 +20,7 @@ export function getPayInfo(params){
 export function confirmOrder(id,params={}){
     return axios.post(`/application/${id}/confirm`,params)
 }
+
+export function cancelOrder(id,params={}){
+    return axios.post(`/application/${id}/cancel`,params)
+}
