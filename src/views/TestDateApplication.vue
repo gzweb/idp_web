@@ -97,8 +97,33 @@
                 </div>
             </div>
             
+            
 
             <div class="container form-view">
+                <!-- 学术模式 -->
+                <label class="label form-label">{{$t('ap57')}}</label>
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                <div class="select is-fullwidth">
+                                    <select name="change_version" v-validate="'required'" v-model="params.change_version" @change="selectChange">
+                                        <option disabled value="">{{$t('ap57')}}</option>
+                                        <option :value="true">
+                                            {{$t('ap58')}}
+                                        </option>
+                                        <option :value="false">
+                                            {{$t('ap59')}}
+                                        </option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-show="errors.has('change_version')" class="help is-danger">{{ $t('ap57') }}</div>
+                    </div>
+                </div>
+
                 <label class="label form-label">{{$t('ap12')}}</label>
                 <div class="columns">
                     <div class="column is-6">
@@ -118,7 +143,7 @@
                         <div v-show="errors.has('reason')" class="help is-danger">{{ $t('ap12') }}</div>
                     </div>
                     
-                    <div class="column is-6" v-if="params.reason == 'ABSENT'">
+                    <div class="column is-6" v-if="isUploadShow">
                         <div class="file has-name is-fullwidth">
                             <label class="file-label">
                                 <input class="file-input" type="file" name="file" @change="imgChange" >
@@ -220,6 +245,8 @@ export default {
                 }
             },
 
+            isUploadShow:false,
+
             test_type_1:'',
             test_type_2:'',
             selectTypeArr1:[],
@@ -244,7 +271,8 @@ export default {
                 test_date:'',
                 new_test_date:'',
                 reason:'',
-                medical_proof:''
+                medical_proof:'',
+                change_version:''
             }
         }
     },
@@ -278,9 +306,13 @@ export default {
         const data = await getApplicationInfo('TDT');
 
         this.selectArr = data.data.test_type;
-        this.selectArr1 = data.data.reason;
+        // this.selectArr1 = data.data.reason;
 
-        this.ruleCtx = data.data.sector
+        this.ruleCtx = data.data.sector;
+
+
+        this.temporaryArr = data.data.reason;
+        this.validateArr = data.data.reason_medical_proof;
 
 
 
@@ -354,6 +386,20 @@ export default {
                             this.params.test_type = '';
                             this.test_type_2 = '';
                             this.selectTypeArr1 = this.selectArr[e.target.value];
+
+                            let result = [];
+
+                            for(let x in this.temporaryArr[e.target.value]) {
+                                result.push({
+                                    value:x,
+                                    text:this.temporaryArr[e.target.value][x]
+                                })
+                            };
+                            this.isUploadShow = false;
+                            this.params.reason = '';
+
+                            this.selectArr1 = result;  
+                            
                         break;
                     case 'params.test_type_2':
                             this.params.test_type = '';
@@ -367,7 +413,20 @@ export default {
                 //     this.params.testType = e.target.value
                 // break;
                 case 'reason':
-                    this.params.reason = e.target.value
+                    this.params.reason = e.target.value;
+
+
+                     let isFind = this.validateArr.includes(e.target.value);    //判断显示上传和重置时间
+
+                    // console.log(this.validateArr.includes(e.target.value))
+                    
+                    
+
+                    if(!isFind){
+                        this.isUploadShow = false;
+                    }else{
+                        this.isUploadShow = true;
+                    };
 
                     // if(e.target.value == 'REQUEST'){
                     //     this.params.test_date = '';
@@ -397,15 +456,13 @@ export default {
             //     this.$router.replace(path)
             // };
         },
-        async submitForm(){
-
-    
+        async submitForm(){    
             
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
 
-                    if(!this.params.medical_proof && this.params.reason == 'ABSENT') {
+                    if(!this.params.medical_proof && this.isUploadShow) {
                         this.modalShow = 1;
                         this.ctxMessage = this.$t('ap14');
                         return;

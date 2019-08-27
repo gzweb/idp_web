@@ -193,7 +193,7 @@
                     </div>
 
 
-                    <div class="column is-6" v-if="params.reason == 'ABSENT'">
+                    <div class="column is-6" v-if="isUploadShow">
                         <div class="file has-name is-fullwidth">
                             <label class="file-label">
                                 <input class="file-input" type="file" name="file" @change="imgChange" >
@@ -291,6 +291,8 @@ export default {
                 }
             },
 
+            isUploadShow:false,
+
             isCash:0,
 
             test_type_1:'',
@@ -340,8 +342,11 @@ export default {
         this.ruleCtx = data.data.sector
         this.selectArr = data.data.test_type;
         this.selectArr1 = data.data.refund_type;
-        this.selectArr2 = data.data.reason;
+        // this.selectArr2 = data.data.reason;
         this.selectArr3 = data.data.refund_payee_name;
+
+        this.temporaryArr = data.data.reason;
+        this.validateArr = data.data.reason_medical_proof;
 
         this.beforeTime = t1.setDate(t1.getDate() - parseInt(data.data.sector.test_date_range[0]))
         this.maxTime = t2.setDate(t2.getDate() - parseInt(data.data.sector.test_date_range[1]))
@@ -358,15 +363,30 @@ export default {
                 switch(e.target.name) {
                     case 'params.test_type':
                             this.params.test_type = e.target.value;
+                            // this.selectArr2 = data.data.reason;
                         break;
                     case 'params.test_type_1':
                             this.params.test_type = '';
                             this.test_type_2 = '';
                             this.selectTypeArr1 = this.selectArr[e.target.value];
+
+                            let result = [];
+
+                            for(let x in this.temporaryArr[e.target.value]) {
+                                result.push({
+                                    value:x,
+                                    text:this.temporaryArr[e.target.value][x]
+                                })
+                            };
+                            this.isUploadShow = false;
+                            this.params.reason = '';
+
+                            this.selectArr2 = result;                            
                         break;
                     case 'params.test_type_2':
                             this.params.test_type = '';
                             this.selectTypeArr2 = this.selectTypeArr1[e.target.value];
+                            
                         break;
                 };
             };
@@ -376,19 +396,33 @@ export default {
                 //     this.params.test_type = e.target.value
                 // break;
                 case 'reason':
-                    this.params.reason = e.target.value
+                    
 
-                    if(e.target.value == 'REQUEST'){
+                    // includes
+
+
+                    this.params.reason = e.target.value;
+                    
+                    // this.validateArr.includes(e.target.value)
+                    let isFind = this.validateArr.includes(e.target.value);    //判断显示上传和重置时间
+
+                    // console.log(this.validateArr.includes(e.target.value))
+                    
+                    
+
+                    if(!isFind){
                         this.params.test_date = '';
+                        this.isUploadShow = false;
                         const time = new Date();
                         this.beforeTime = time.setDate(time.getDate()+35);
                     }else{
                         this.params.test_date = '';
+                        this.isUploadShow = true;
                         this.beforeTime = new Date();
                     };
                 break;
                 case 'params.refund_type':
-                    this.params.refund_type = e.target.value
+                    this.params.refund_type = e.target.value;
                 break;
                 case 'cash':
                     this.params.refund_type = (this.isCash?this.selectArr1[1]['value']:this.selectArr1[0]['value'])
@@ -453,7 +487,7 @@ export default {
 
                     
 
-                    if(!this.params.medical_proof && this.params.reason == 'ABSENT') {
+                    if(!this.params.medical_proof && this.isUploadShow) {
                         this.modalShow = 1;
                         this.ctxMessage = this.$t('ap14');
                         return;

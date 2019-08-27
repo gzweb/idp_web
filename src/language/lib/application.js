@@ -12,7 +12,7 @@ export default {
         "ap10":"请选择注册考试日期",
         "ap11":"首选新考试日期",
         "ap12":"选择原因",
-        // "ap13":"",
+        // "ap13":"选择学术模式",
         "ap14":"选择上传证明图片",
         "ap15":"上传成功",
         "ap16":"提交成功",
@@ -56,7 +56,9 @@ export default {
         "ap54":'原定的考试日期',
         "ap55":'新的考试日期',
         "ap56":'请于 <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> 查看本中心最新的考试日期',
-
+        "ap57":'更改模式 (学术/通用模式)',
+        "ap58":'是',
+        "ap59":'否'
     },
     "en":{
         "ap1":"Choose the Type of Refund",
@@ -71,7 +73,7 @@ export default {
         "ap10":"Registered Test Date",
         "ap11":"Preferred New Test Date",
         "ap12":"Select a Reason",
-        // "ap13":"",
+        // "ap13":"Select Module",
         "ap14":"Select the file",
         "ap15":"Upload successful",
         "ap16":"Submitted successfully",
@@ -115,6 +117,9 @@ export default {
         "ap54":'Scheduled Test Date',
         "ap55":'Preferred New Test Date',
         "ap56":'Please go to <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> for the latest test session availability of our Test Centre',
+        "ap57":'Change of Module (Academic/General Training)',
+        "ap58":'Yes',
+        "ap59":'No'
     },
     "zh":{
         "ap1":"選擇退款類型",
@@ -129,7 +134,7 @@ export default {
         "ap10":"請選擇註冊考試日期",
         "ap11":"首選新考試日期",
         "ap12":"選擇原因",
-        // "ap13":"",
+        // "ap13":"选择學術模式",
         "ap14":"選擇上載證明圖片",
         "ap15":"上載成功",
         "ap16":"提交成功",
@@ -173,6 +178,8 @@ export default {
         "ap54":'原定的考試日期',
         "ap55":'新的考試日期',
         "ap56":'請於 <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> 查看本中心最新的考試日期',
-        
+        "ap57":'更改模式 (學術/通用模式)',
+        "ap58":'是',
+        "ap59":'否'
     }
 }

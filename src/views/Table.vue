@@ -53,7 +53,7 @@
                 <div class="columns columns-style-1">
                     <div class="column">
                         <div class="columns">
-                            <div class="column">
+                            <div class="column" v-if="!isBackHide">
                                 <div @click="backTap" class="button button-style table-button">{{$t('table2')}}</div>
                             </div>
                             <div class="column is-hidden-touch">
@@ -106,6 +106,7 @@ export default {
         return {
             menuList:[{},{},{}],
             list:[],
+            isBackHide:false,
             isConfirm:this.$route.query.isConfirm
         }
     },
@@ -129,12 +130,24 @@ export default {
     },
     async created(){
         
+
+      
+
         const data = await getApplicationCtx(this.$route.params.id,{
             confirm:this.isConfirm?1:0
         })
+
+        
         
         this.menuList = data.data[0]['value'];
         this.list = data.data.slice(1);
+
+
+        if((this.menuList[2]['value'] == 'Test Date Transfer' || this.menuList[2]['value'] == 'Refund') && this.isConfirm) {
+            this.isBackHide = true;
+        };
+
+        
         
     },
     methods:{
@@ -155,6 +168,8 @@ export default {
             this.$router.push({
                 path:this.$route.path
             })
+
+            
             
 
 

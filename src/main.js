@@ -40,6 +40,19 @@ Vue.use(VueTranslator, {
 
 
 
+const isHttps = document.location.protocol == 'https:'?true:false;
+
+
+if(!isHttps) {
+	const url = window.location.href.substring(5);
+	window.location.href = `https:${url}`;
+};
+
+
+
+
+
+
 router.beforeEach((to, from, next) => {
 
 	NProgress.start();
