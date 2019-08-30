@@ -422,8 +422,8 @@ export default {
                   
                     this.params.test_date = '';
                 
-                    this.beforeTime = t1.setDate(t1.getDate() + this.dataArr[e.target.value][0]);
-                    this.maxTime = t2.setDate(t2.getDate() + this.dataArr[e.target.value][1]);
+                    this.beforeTime = t1.setDate(t1.getDate() - this.dataArr[e.target.value][0]);
+                    this.maxTime = t2.setDate(t2.getDate() - this.dataArr[e.target.value][1]);
 
 
                     this.isUploadShow = (!isFind?false:true);

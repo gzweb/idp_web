@@ -229,6 +229,7 @@ import translator from '../language/lib/application'
 import { getApplicationInfo,postApplication,upLoadImg } from '../api/application'
 
 
+
 export default {
     components:{
         DatePicker,
@@ -429,14 +430,13 @@ export default {
                     let t3 = new Date();
                     let t4 = new Date();
 
-                    
+                    this.beforeTime = t1.setDate(t1.getDate() - parseInt(this.resultArr[e.target.value][0][0]))
+                    this.maxTime = t2.setDate(t2.getDate() - parseInt(this.resultArr[e.target.value][0][1]))
 
-                    this.beforeTime = t1.setDate(t1.getDate() + this.resultArr[e.target.value][0][0])
-                    this.maxTime = t2.setDate(t2.getDate() + this.resultArr[e.target.value][0][1])
-
-                    this.beforeTime1 = t3.setDate(t3.getDate() + this.resultArr[e.target.value][1][0])
-                    this.maxTime1 = t4.setDate(t4.getDate() + this.resultArr[e.target.value][1][1])
+                    this.beforeTime1 = t3.setDate(t3.getDate() - parseInt(this.resultArr[e.target.value][1][0]))
+                    this.maxTime1 = t4.setDate(t4.getDate() - parseInt(this.resultArr[e.target.value][1][1]))
                     
+                   
                     
 
                     this.isUploadShow = (!isFind?false:true);

@@ -18,33 +18,30 @@ export function formatSeconds(value) {
     };
 }
 
-// export function setCookie(name, value, exdays) {  
-//     var d = new Date();  
-//     d.setTime(d.getTime() + (exdays*24*60*60*1000));  
-//     var expires = "expires="+d.toUTCString();  
-//     // document.cookie = cname + "=" + cvalue + "; " + expires;  
-//     document.cookie = `${name}=${value}; ${expires}`
-// } 
 
-// export function getCookie(cookie_name){
-//     var allcookies = document.cookie;
-//     var cookie_pos = allcookies.indexOf(cookie_name);
-//     if (cookie_pos != -1){
-//         cookie_pos += cookie_name.length + 1; 
-//         var cookie_end = allcookies.indexOf(";", cookie_pos);
-//         if (cookie_end == -1){
-//             cookie_end = allcookies.length;
-//         }
-//         var value = unescape(allcookies.substring(cookie_pos, cookie_end)); 
+// export function initDefaultDate(n,timeUnit) {
+//     var curr_date = new Date();
+//     if (timeUnit === 'd') {
+//     curr_date.setDate(curr_date.getDate() + n);
+//     } else if (timeUnit === 'M') {
+//         curr_date.setMonth(curr_date.getMonth() + n);
+//     } else if (timeUnit === 'y') {
+//         curr_date.setFullYear(curr_date.getFullYear() + n);
 //     }
-//     return value;
-// } 
+//     var strYear = curr_date.getFullYear();
+//     var strMonth = curr_date.getMonth()+1;
+//     var strDay = curr_date.getDate();
+//     var strHours = curr_date.getHours();
+//     var strMinutes = curr_date.getMinutes();
+ 
+//     // var datastr = strYear + '-' + formatNumber(strMonth) + '-'
+//     //     + formatNumber(strDay) +' '+ formatNumber(strHours) + ':' + formatNumber(strMinutes);
+//     var datastr = strYear + '-' + formatNumber(strMonth) + '-'
+//         + formatNumber(strDay);
+//     return datastr;
+// }
 
 
-// export function removeCookie(name){
-//     var ex = new Date();ex.setTime(ex.getTime()-1);
-//     var path = process.env.NODE_ENV == 'development' ? './':'/html'
-//     // var path = './'
-//     // document.cookie = name + "=; expires="+ex.toGMTString();
-//     document.cookie = `${name}=;expires=${ex.toGMTString()};path=${path}`
+// function formatNumber(value){  
+//     return (value < 10 ? '0' : '') + value;  
 // }
