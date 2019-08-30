@@ -331,8 +331,8 @@ export default {
     async created(){
         // console.log(Language)
 
-        let t1 = new Date();
-        let t2 = new Date();
+        // let t1 = new Date();
+        // let t2 = new Date();
 
         // this.beforeTime = t1.setDate(t1.getDate() - 7)
         // this.maxTime = t2.setDate(t2.getDate() + 365)
@@ -347,9 +347,10 @@ export default {
 
         this.temporaryArr = data.data.reason;
         this.validateArr = data.data.reason_medical_proof;
+        this.dataArr = data.data.test_type_date_range;
 
-        this.beforeTime = t1.setDate(t1.getDate() - parseInt(data.data.sector.test_date_range[0]))
-        this.maxTime = t2.setDate(t2.getDate() - parseInt(data.data.sector.test_date_range[1]))
+        // this.beforeTime = t1.setDate(t1.getDate() - parseInt(data.data.sector.test_date_range[0]))
+        // this.maxTime = t2.setDate(t2.getDate() - parseInt(data.data.sector.test_date_range[1]))
 
         console.log(data)
     },
@@ -363,6 +364,8 @@ export default {
                 switch(e.target.name) {
                     case 'params.test_type':
                             this.params.test_type = e.target.value;
+
+                            
                             // this.selectArr2 = data.data.reason;
                         break;
                     case 'params.test_type_1':
@@ -381,7 +384,10 @@ export default {
                             this.isUploadShow = false;
                             this.params.reason = '';
 
-                            this.selectArr2 = result;                            
+                            this.selectArr2 = result;   
+                            
+
+                    
                         break;
                     case 'params.test_type_2':
                             this.params.test_type = '';
@@ -409,17 +415,29 @@ export default {
                     // console.log(this.validateArr.includes(e.target.value))
                     
                     
+                    
 
-                    if(!isFind){
-                        this.params.test_date = '';
-                        this.isUploadShow = false;
-                        const time = new Date();
-                        this.beforeTime = time.setDate(time.getDate()+35);
-                    }else{
-                        this.params.test_date = '';
-                        this.isUploadShow = true;
-                        this.beforeTime = new Date();
-                    };
+                    let t1 = new Date();
+                    let t2 = new Date();
+                  
+                    this.params.test_date = '';
+                
+                    this.beforeTime = t1.setDate(t1.getDate() + this.dataArr[e.target.value][0]);
+                    this.maxTime = t2.setDate(t2.getDate() + this.dataArr[e.target.value][1]);
+
+
+                    this.isUploadShow = (!isFind?false:true);
+
+                    // if(!isFind){
+                    //     // this.params.test_date = '';
+                    //     // this.isUploadShow = false;
+                    //     // const time = new Date();
+                    //     // this.beforeTime = time.setDate(time.getDate()+35);
+                    // }else{
+                    //     // this.params.test_date = '';
+                    //     // this.isUploadShow = true;
+                    //     // this.beforeTime = new Date();
+                    // };
                 break;
                 case 'params.refund_type':
                     this.params.refund_type = e.target.value;

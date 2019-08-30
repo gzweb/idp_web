@@ -233,8 +233,9 @@ export default {
             const data = await api.getBanner();
             data.data.sector.unshift({});        
             this.$store.commit('setTestList', data.data)
-            // console.log(data.data)
+            console.log(data.data)
         };
+        
 
 
         this.$nextTick(()=>{

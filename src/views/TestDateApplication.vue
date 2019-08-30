@@ -291,10 +291,10 @@ export default {
     async created(){
 
 
-        let t1 = new Date();
-        let t2 = new Date();
-        let t3 = new Date();
-        let t4 = new Date();
+        // let t1 = new Date();
+        // let t2 = new Date();
+        // let t3 = new Date();
+        // let t4 = new Date();
 
         // this.beforeTime = t1.setDate(t1.getDate() - 7)
         // this.maxTime = t2.setDate(t2.getDate() + 365)
@@ -313,15 +313,16 @@ export default {
 
         this.temporaryArr = data.data.reason;
         this.validateArr = data.data.reason_medical_proof;
+        this.resultArr = data.data.test_type_date_range;
 
 
 
-        this.beforeTime = t1.setDate(t1.getDate() - parseInt(data.data.sector.test_date_range[0]))
-        this.maxTime = t2.setDate(t2.getDate() - parseInt(data.data.sector.test_date_range[1]))
+        // this.beforeTime = t1.setDate(t1.getDate() - parseInt(data.data.sector.test_date_range[0]))
+        // this.maxTime = t2.setDate(t2.getDate() - parseInt(data.data.sector.test_date_range[1]))
 
 
-        this.beforeTime1 = t3.setDate(t3.getDate() - parseInt(data.data.sector.new_test_date_range[0]))
-        this.maxTime1 = t4.setDate(t4.getDate() - parseInt(data.data.sector.new_test_date_range[1]))
+        // this.beforeTime1 = t3.setDate(t3.getDate() - parseInt(data.data.sector.new_test_date_range[0]))
+        // this.maxTime1 = t4.setDate(t4.getDate() - parseInt(data.data.sector.new_test_date_range[1]))
 
      
     },
@@ -419,14 +420,32 @@ export default {
                      let isFind = this.validateArr.includes(e.target.value);    //判断显示上传和重置时间
 
                     // console.log(this.validateArr.includes(e.target.value))
+
+                    this.params.test_date = '';
+                    this.params.new_test_date = '';
+
+                    let t1 = new Date();
+                    let t2 = new Date();
+                    let t3 = new Date();
+                    let t4 = new Date();
+
+                    
+
+                    this.beforeTime = t1.setDate(t1.getDate() + this.resultArr[e.target.value][0][0])
+                    this.maxTime = t2.setDate(t2.getDate() + this.resultArr[e.target.value][0][1])
+
+                    this.beforeTime1 = t3.setDate(t3.getDate() + this.resultArr[e.target.value][1][0])
+                    this.maxTime1 = t4.setDate(t4.getDate() + this.resultArr[e.target.value][1][1])
                     
                     
 
-                    if(!isFind){
-                        this.isUploadShow = false;
-                    }else{
-                        this.isUploadShow = true;
-                    };
+                    this.isUploadShow = (!isFind?false:true);
+
+                    // if(!isFind){
+                    //     this.isUploadShow = false;
+                    // }else{
+                    //     this.isUploadShow = true;
+                    // };
 
                     // if(e.target.value == 'REQUEST'){
                     //     this.params.test_date = '';

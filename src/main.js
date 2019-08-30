@@ -40,13 +40,13 @@ Vue.use(VueTranslator, {
 
 
 
-const isHttps = document.location.protocol == 'https:'?true:false;
+// const isHttps = document.location.protocol == 'https:'?true:false;
 
 
-if(!isHttps) {
-	const url = window.location.href.substring(5);
-	window.location.href = `https:${url}`;
-};
+// if(!isHttps) {
+// 	const url = window.location.href.substring(5);
+// 	window.location.href = `https:${url}`;
+// };
 
 
 
