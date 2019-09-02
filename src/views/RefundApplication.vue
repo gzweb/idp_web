@@ -88,7 +88,7 @@
                 <div class="columns">
                     <div class="column is-6">
                         <date-picker name="test_date" v-validate="'required'" :editable="false" :placeholder="$t('validation-6')" :not-before="beforeTime" :not-after="maxTime" value-type="format" width="100%" input-class="input" v-model="params.test_date" :lang="getLanguage" type="date" format="DD/MM/YYYY" confirm></date-picker>
-                        <div class="application-tips">{{$t('ap52')}}</div>
+                        <!-- <div class="application-tips">{{$t('ap52')}}</div> -->
                         <div v-show="errors.has('test_date')" class="help is-danger">{{ $t('validation-6') }}</div>
                     </div>
                 </div>
