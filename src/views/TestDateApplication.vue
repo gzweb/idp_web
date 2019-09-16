@@ -109,12 +109,11 @@
                                 <div class="select is-fullwidth">
                                     <select name="change_version" v-validate="'required'" v-model="params.change_version" @change="selectChange">
                                         <option disabled value="">{{$t('ap57')}}</option>
-                                        <option :value="true">
-                                            {{$t('ap58')}}
+
+                                        <option v-for="(item,key) in moduleArr" :key="key" :value="$t(item)">
+                                            {{$t(item)}}
                                         </option>
-                                        <option :value="false">
-                                            {{$t('ap59')}}
-                                        </option>
+
                                         
                                     </select>
                                 </div>
@@ -264,6 +263,8 @@ export default {
             modalShow:0,
             ctxMessage:'',
 
+            moduleArr:[],
+
             params:{
                 first_name:'',
                 last_name:'',
@@ -399,8 +400,24 @@ export default {
                             };
                             this.isUploadShow = false;
                             this.params.reason = '';
+                            this.params.change_version = '';
 
                             this.selectArr1 = result;  
+                            
+                            if(e.target.value != 'Life Skills') {
+                                this.moduleArr = [
+                                    'ap58',
+                                    'ap59'
+                                ];
+                            }else{
+                                this.moduleArr = [
+                                    'ap60',
+                                    'ap61'
+                                ];
+                            };
+                            // console.log(e.target.value)
+
+                            // this.moduleArr =  
                             
                         break;
                     case 'params.test_type_2':
@@ -476,7 +493,7 @@ export default {
             // };
         },
         async submitForm(){    
-            
+       
             this.$validator.validateAll().then(async res => {
                 if (res) {
 
@@ -485,13 +502,24 @@ export default {
                         this.modalShow = 1;
                         this.ctxMessage = this.$t('ap14');
                         return;
-                    }
+                    };
 
-                 
+
+
+
+                    const reuslt = JSON.parse(JSON.stringify(this.params));
+
+                    if(reuslt.change_version == '學術' || reuslt.change_version == '学术') {
+                        reuslt.change_version = 'Academic'
+                    };
+
+                    if(reuslt.change_version == '通用模式') {
+                        reuslt.change_version = 'General Training'
+                    };
 
                     
 
-                    const data = await postApplication('TDT',this.params);
+                    const data = await postApplication('TDT',reuslt);
                    
                     
                     

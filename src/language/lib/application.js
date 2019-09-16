@@ -57,8 +57,10 @@ export default {
         "ap55":'新的考试日期',
         "ap56":'请于 <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> 查看本中心最新的考试日期',
         "ap57":'更改模式 (学术/通用模式)',
-        "ap58":'是',
-        "ap59":'否'
+        "ap58":'学术',
+        "ap59":'通用模式',
+        "ap60":'A1',
+        "ap61":'B1',
     },
     "en":{
         "ap1":"Choose the Type of Refund",
@@ -118,8 +120,10 @@ export default {
         "ap55":'Preferred New Test Date',
         "ap56":'Please go to <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> for the latest test session availability of our Test Centre',
         "ap57":'Change of Module (Academic/General Training)',
-        "ap58":'Yes',
-        "ap59":'No'
+        "ap58":'Academic',
+        "ap59":'General Training',
+        "ap60":'A1',
+        "ap61":'B1',
     },
     "zh":{
         "ap1":"選擇退款類型",
@@ -179,7 +183,9 @@ export default {
         "ap55":'新的考試日期',
         "ap56":'請於 <a href="https://my.ieltsessentials.com/Home" target="_blank">https://my.ieltsessentials.com/Home</a> 查看本中心最新的考試日期',
         "ap57":'更改模式 (學術/通用模式)',
-        "ap58":'是',
-        "ap59":'否'
+        "ap58":'學術',
+        "ap59":'通用模式',
+        "ap60":'A1',
+        "ap61":'B1',
     }
 }
