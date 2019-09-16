@@ -517,6 +517,22 @@ export default {
                         reuslt.change_version = 'General Training'
                     };
 
+
+                    switch(reuslt.change_version) {
+                        case 'Academic':
+                            reuslt.change_version = 0;
+                            break;
+                        case 'General Training':
+                            reuslt.change_version = 1;
+                        break;
+                        case 'A1':
+                            reuslt.change_version = 2;
+                        break;
+                        case 'B1':
+                            reuslt.change_version = 3;
+                        break;
+                    }
+
                     
 
                     const data = await postApplication('TDT',reuslt);
