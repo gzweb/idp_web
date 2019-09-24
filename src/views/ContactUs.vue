@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="column is-6 is-offset-1">
-                        <img src="../../public/images/map.png" alt="">
+                        <img src="../../public/images/map.jpg" alt="">
                     </div>
                 </div>
             </div>
