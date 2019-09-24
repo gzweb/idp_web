@@ -109,10 +109,12 @@
                                 <div class="select is-fullwidth">
                                     <select name="change_version" v-validate="'required'" v-model="params.change_version" @change="selectChange">
                                         <option disabled value="">{{$t('ap57')}}</option>
-
-                                        <option v-for="(item,key) in moduleArr" :key="key" :value="$t(item)">
+                                        
+                                        <option value="1">{{$t('ap58')}}</option>
+                                        <option value="0">{{$t('ap59')}}</option>
+                                        <!-- <option v-for="(item,key) in moduleArr" :key="key" :value="$t(item)">
                                             {{$t(item)}}
-                                        </option>
+                                        </option> -->
 
                                         
                                     </select>
@@ -263,7 +265,7 @@ export default {
             modalShow:0,
             ctxMessage:'',
 
-            moduleArr:[],
+            // moduleArr:[],
 
             params:{
                 first_name:'',
@@ -400,21 +402,21 @@ export default {
                             };
                             this.isUploadShow = false;
                             this.params.reason = '';
-                            this.params.change_version = '';
+                            // this.params.change_version = '';
 
                             this.selectArr1 = result;  
                             
-                            if(e.target.value != 'Life Skills') {
-                                this.moduleArr = [
-                                    'ap58',
-                                    'ap59'
-                                ];
-                            }else{
-                                this.moduleArr = [
-                                    'ap60',
-                                    'ap61'
-                                ];
-                            };
+                            // if(e.target.value != 'Life Skills') {
+                            //     this.moduleArr = [
+                            //         'ap58',
+                            //         'ap59'
+                            //     ];
+                            // }else{
+                            //     this.moduleArr = [
+                            //         'ap60',
+                            //         'ap61'
+                            //     ];
+                            // };
                             // console.log(e.target.value)
 
                             // this.moduleArr =  
@@ -493,6 +495,8 @@ export default {
             // };
         },
         async submitForm(){    
+
+    
        
             this.$validator.validateAll().then(async res => {
                 if (res) {
@@ -507,35 +511,35 @@ export default {
 
 
 
-                    const reuslt = JSON.parse(JSON.stringify(this.params));
+                    // const reuslt = JSON.parse(JSON.stringify(this.params));
 
-                    if(reuslt.change_version == '學術' || reuslt.change_version == '学术') {
-                        reuslt.change_version = 'Academic'
-                    };
+                    // if(reuslt.change_version == '學術' || reuslt.change_version == '学术') {
+                    //     reuslt.change_version = 'Academic'
+                    // };
 
-                    if(reuslt.change_version == '通用模式') {
-                        reuslt.change_version = 'General Training'
-                    };
+                    // if(reuslt.change_version == '通用模式') {
+                    //     reuslt.change_version = 'General Training'
+                    // };
 
 
-                    switch(reuslt.change_version) {
-                        case 'Academic':
-                            reuslt.change_version = 0;
-                            break;
-                        case 'General Training':
-                            reuslt.change_version = 1;
-                        break;
-                        case 'A1':
-                            reuslt.change_version = 2;
-                        break;
-                        case 'B1':
-                            reuslt.change_version = 3;
-                        break;
-                    }
+                    // switch(reuslt.change_version) {
+                    //     case 'Academic':
+                    //         reuslt.change_version = 0;
+                    //         break;
+                    //     case 'General Training':
+                    //         reuslt.change_version = 1;
+                    //     break;
+                    //     case 'A1':
+                    //         reuslt.change_version = 2;
+                    //     break;
+                    //     case 'B1':
+                    //         reuslt.change_version = 3;
+                    //     break;
+                    // }
 
                     
 
-                    const data = await postApplication('TDT',reuslt);
+                    const data = await postApplication('TDT',this.params);
                    
                     
                     
