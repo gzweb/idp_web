@@ -63,6 +63,7 @@ export default {
         // "ap59":'通用模式',
         "ap60":'A1',
         "ap61":'B1',
+        "ap62":'更改模式 (A1/B1)'
     },
     "en":{
         "ap1":"Choose the Type of Refund",
@@ -128,6 +129,7 @@ export default {
         // "ap59":'General Training',
         "ap60":'A1',
         "ap61":'B1',
+        "ap62":'Change of Module (A1/B1)',
     },
     "zh":{
         "ap1":"選擇退款類型",
@@ -193,5 +195,6 @@ export default {
         // "ap59":'通用模式',
         "ap60":'A1',
         "ap61":'B1',
+        "ap62":'更改模式 (A1/B1)'
     }
 }

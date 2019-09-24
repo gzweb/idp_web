@@ -101,15 +101,17 @@
 
             <div class="container form-view">
                 <!-- 学术模式 -->
-                <label class="label form-label">{{$t('ap57')}}</label>
+                <!-- <label class="label form-label">{{$t('ap57')}}</label> -->
+                <label class="label form-label">{{changeTitle}}</label>
+          
                 <div class="columns">
                     <div class="column is-6">
                         <div class="field has-addons">
                             <div class="control is-expanded">
                                 <div class="select is-fullwidth">
                                     <select name="change_version" v-validate="'required'" v-model="params.change_version" @change="selectChange">
-                                        <option disabled value="">{{$t('ap57')}}</option>
-                                        
+                                        <option disabled value="">{{changeTitle}}</option>
+                                        <!-- <option disabled value="">{{$t('ap57')}}</option> -->
                                         <option value="1">{{$t('ap58')}}</option>
                                         <option value="0">{{$t('ap59')}}</option>
                                         <!-- <option v-for="(item,key) in moduleArr" :key="key" :value="$t(item)">
@@ -266,6 +268,7 @@ export default {
             ctxMessage:'',
 
             // moduleArr:[],
+            changeTitle:this.$t('ap57'),
 
             params:{
                 first_name:'',
@@ -405,18 +408,24 @@ export default {
                             // this.params.change_version = '';
 
                             this.selectArr1 = result;  
+
+
+
                             
-                            // if(e.target.value != 'Life Skills') {
-                            //     this.moduleArr = [
-                            //         'ap58',
-                            //         'ap59'
-                            //     ];
-                            // }else{
-                            //     this.moduleArr = [
-                            //         'ap60',
-                            //         'ap61'
-                            //     ];
-                            // };
+                            if(e.target.value != 'Life Skills') {
+
+                                this.changeTitle = this.$t('ap57');
+                                // this.moduleArr = [
+                                //     'ap58',
+                                //     'ap59'
+                                // ];
+                            }else{
+                                this.changeTitle = this.$t('ap62');
+                                // this.moduleArr = [
+                                //     'ap60',
+                                //     'ap61'
+                                // ];
+                            };
                             // console.log(e.target.value)
 
                             // this.moduleArr =  
