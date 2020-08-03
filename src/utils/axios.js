@@ -75,7 +75,8 @@ service.interceptors.response.use(
 			switch(res.code) {
 				case 4001:   // token失效
 					setTimeout(()=>{
-						Cookies.remove('token');
+						// Cookies.remove('token');
+						localStorage.removeItem('token');
 						window.location.reload();
 					},2000)
 				break;

@@ -75,7 +75,8 @@ export default {
         hideModal(){
             this.show = 0;
             if(this.isSussces) {
-                Cookies.remove('token');
+                // Cookies.remove('token');
+                localStorage.removeItem('token');
                 this.$router.push('/login')
             };
         },

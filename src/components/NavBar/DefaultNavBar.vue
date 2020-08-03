@@ -180,7 +180,11 @@ export default {
         },
         async exitAccount(){
             await exitAccount();
-            Cookies.remove('token');
+            // Cookies.remove('token');
+
+            localStorage.removeItem('token');
+
+            
             // console.log(removeCookie);
             location.reload();
         },

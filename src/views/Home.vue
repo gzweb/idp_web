@@ -224,7 +224,12 @@ export default {
                         return;
                     };
                     this.isSussces = 1;
-                    Cookies.remove('token');
+                    // Cookies.remove('token');
+
+                    localStorage.removeItem('token');
+
+
+                    
                     this.ctxMessage = this.$t('home18');
                 }
 
